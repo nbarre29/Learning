@@ -1,0 +1,11 @@
+-> To clone a Git repository Studio Code, follow these steps:
+
+From the menu bar, Git -> Clone  (sometimes in the menu bar we may see VCS instead of Git, anyway we can do VCS -> Clone and it works )
+
+
+(sometimes in the menu bar we may see VCS instead of Git, anyway we can do VCS -> Get from Version Control... -> from drop down select Git as Version control , give the URL and the Directory where we want it to be downloaded. )
+
+
+-> After importing a maven project, if it is not recognized as a maven project.  right click on pom.xml -> "Add as Maven Project"
+
+

@@ -1,0 +1,129 @@
+1. JavaScript Object
+
+    A JavaScript object is a collection of key-value pairs.
+    Keys can be strings (or symbols), and values can be of any data type (string, number, array, function, other objects, etc.).
+	
+	
+const jsObject = {
+  name: 'Alice',
+  age: 25,
+  greet: function () {
+    console.log('Hello!');
+  },
+};
+console.log(jsObject.name); // Accessing a property: "Alice"
+jsObject.greet(); // Calling a method: "Hello!"
+
+
+2. JSON (JavaScript Object Notation)
+
+    JSON is a text-based format for exchanging data.
+    It's a string representation of an object, designed to be lightweight and easy to parse.
+    Used for data storage and transfer, especially between a client and server (e.g., via HTTP requests).
+
+Rules of JSON:
+
+    Keys must be strings enclosed in double quotes ("").
+    Values can only be one of the following types:
+        Strings, numbers, booleans, arrays, objects, or null.
+    JSON cannot include methods or special objects like undefined, Date, Map, etc.
+
+Example:
+const jsonString = '{"name": "Alice", "age": 25}';
+console.log(jsonString); // A string, not an object!
+
+
+3. Key Differences Between JavaScript Objects and JSON:
+
+    Type:
+        JavaScript Object: An object.
+        JSON: A string.
+
+    Purpose:
+        JavaScript Object: Used for general programming in JavaScript.
+        JSON: Used for data interchange between systems.
+
+    Keys:
+        JavaScript Object: Can be strings or symbols.
+        JSON: Must be strings enclosed in double quotes ("").
+
+    Values:
+        JavaScript Object: Can be any valid JavaScript value (e.g., strings, numbers, functions, objects, etc.).
+        JSON: Limited to JSON-supported types (e.g., strings, numbers, booleans, arrays, objects, or null).
+
+    Methods/Functions:
+        JavaScript Object: Can include methods (functions).
+        JSON: Does not allow functions.
+	
+		
+->  The JavaScript object below cannot be directly converted to JSON as-is because JSON does not support functions. JSON is strictly for serializing data, so it can only handle key-value pairs where the values are strings, numbers, arrays, objects, booleans, or null.
+
+ const jsObject = {
+  name: 'Alice',
+  age: 25,
+  greet: function () {
+    console.log('Hello!');
+  },
+};
+
+const jsonString = JSON.stringify(jsObject);
+console.log(jsonString);
+// Output: {"name":"Alice","age":25}
+
+The attempt to convert above object to a JSON string using JSON.stringify(), the greet function is ignored.
+JSON is a text-based data format that doesn't support non-serializable values like functions, undefined, or symbols. These types are automatically skipped during serialization.
+___________________________________________________________________________
+
+->  // Create a Map
+const myMap = new Map<string, number>();
+
+// Add key-value pairs
+myMap.set('apple', 10);
+myMap.set('banana', 20);
+myMap.set('cherry', 30);
+
+// Iterate and print the values
+console.log('Printing values in the Map:');
+myMap.forEach((value, key) => {
+  console.log(`Key: ${key}, Value: ${value}`);
+});
+
+// Another way to iterate using a for...of loop
+console.log('\nUsing for...of loop to print values:');
+for (const [key, value] of myMap) {
+  console.log(`Key: ${key}, Value: ${value}`);
+}
+
+---------------------------------------------------------------------------
+// Create a Map and initialize
+const myMap = new Map<string, number>([
+  ['apple', 10],
+  ['banana', 20],
+  ['cherry', 30],
+]);
+
+___________________________________________________________________________
+
+-> // Create and initialize a Set with numbers
+const mySet = new Set<number>([1, 2, 3, 4, 5]);
+
+// Use forEach to iterate over the Set
+console.log('Iterating over the Set:');
+mySet.forEach((value) => {
+  console.log(value);
+});
+___________________________________________________________________________
+
+-> const person: { [key: string]: string | number } = {
+  name: 'John',
+  age: 30,
+};
+
+for (const key in person) {
+  //   console.log(key, person[key]);
+  console.log(`key: ${key}, value: ${person[key]}`);
+}
+___________________________________________________________________________
+
+
+
