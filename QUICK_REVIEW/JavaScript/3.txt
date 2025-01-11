@@ -1,0 +1,118 @@
+-> The Array.find and Array.some methods in TypeScript serve different purposes:
+
+    Array.find: Returns the first element in the array that satisfies the provided testing function. If no elements match, it returns undefined.
+
+    Array.some: Tests whether at least one element in the array passes the provided testing function. It returns a boolean (true or false).
+
+Key Differences
+
+    Return Value:
+        find: Returns the element itself (or undefined if no match is found).
+        some: Returns true if a match is found, otherwise false.
+    Use Case:
+        Use find when you need the actual matching element.
+        Use some when you just need to check for the presence of a match.
+		
+
+Example 1: Searching for a User
+
+Use Case: Find a user object by email.
+
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+const users: User[] = [
+  { id: 1, name: 'Alice', email: 'alice@example.com' },
+  { id: 2, name: 'Bob', email: 'bob@example.com' },
+  { id: 3, name: 'Charlie', email: 'charlie@example.com' },
+];
+
+// Using find
+const user = users.find((user) => user.email === 'bob@example.com');
+console.log(user); // { id: 2, name: "Bob", email: "bob@example.com" }
+
+// Using some
+const exists = users.some((user) => user.email === 'bob@example.com');
+console.log(exists); // true
+
+
+Example 2: Checking Product Availability
+
+Use Case: Check if at least one product is in stock.
+
+interface Product {
+  id: number;
+  name: string;
+  inStock: boolean;
+}
+
+const products: Product[] = [
+  { id: 101, name: 'Laptop', inStock: false },
+  { id: 102, name: 'Phone', inStock: true },
+  { id: 103, name: 'Tablet', inStock: false },
+];
+
+// Using some
+const hasStock = products.some((product) => product.inStock);
+console.log(hasStock); // true
+
+// Using find
+const firstAvailableProduct = products.find((product) => product.inStock);
+console.log(firstAvailableProduct); // { id: 102, name: "Phone", inStock: true }
+
+
+Example 3: Validating Inputs
+
+Use Case: Validate if any input field is empty.
+
+const inputs = ['John', 'Doe', 'john.doe@example.com', ''];
+
+// Using some
+const hasEmptyField = inputs.some((input) => input.trim() === '');
+console.log(hasEmptyField); // true
+
+
+Example 4: Finding the Earliest Deadline
+
+Use Case: Retrieve the task with the closest deadline.
+
+interface Task {
+  id: number;
+  name: string;
+  deadline: Date;
+}
+
+const tasks: Task[] = [
+  { id: 1, name: 'Task A', deadline: new Date('2025-01-10') },
+  { id: 2, name: 'Task B', deadline: new Date('2025-01-05') },
+  { id: 3, name: 'Task C', deadline: new Date('2025-01-15') },
+];
+
+// Using find (after sorting by deadline)
+const earliestTask = tasks
+  .sort((a, b) => a.deadline.getTime() - b.deadline.getTime())
+  .find(() => true);
+console.log(earliestTask); // { id: 2, name: 'Task B', deadline: 2025-01-05T00:00:00.000Z }
+
+
+Here is the summary table you provided, converted into non-tabular format:
+
+    Scenario: Get the matching object
+        Use find: ✅
+        Use some: ❌
+
+    Scenario: Check if at least one matches
+        Use find: ❌
+        Use some: ✅
+
+    Scenario: Retrieve the first element after sorting
+        Use find: ✅
+        Use some: ❌
+___________________________________________________________________________
+
+
+
