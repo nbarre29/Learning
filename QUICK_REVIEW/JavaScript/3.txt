@@ -99,7 +99,7 @@ const earliestTask = tasks
 console.log(earliestTask); // { id: 2, name: 'Task B', deadline: 2025-01-05T00:00:00.000Z }
 
 
-Here is the summary table you provided, converted into non-tabular format:
+Here is the summary:
 
     Scenario: Get the matching object
         Use find: ✅
@@ -112,6 +112,148 @@ Here is the summary table you provided, converted into non-tabular format:
     Scenario: Retrieve the first element after sorting
         Use find: ✅
         Use some: ❌
+___________________________________________________________________________
+
+-> 
+// Typescript example to find a task with closest deadline. the task object should have id, name, deadline, and priority.
+// the function should return the task object with the closest deadline.
+// if two tasks have the same deadline, the task with the higher priority should be returned.
+// if two tasks have the same deadline and priority, return the first task.
+// if the task list is empty, return null.
+
+interface Task {
+  id: number;
+  name: string;
+  deadline: Date;
+  priority: number;
+}
+
+function findClosestDeadlineTask(tasks: Task[]): Task | null {
+  if (tasks.length === 0) {
+    return null;
+  }
+
+  let closestTask = tasks[0];
+  for (let i = 1; i < tasks.length; i++) {
+    const task = tasks[i];
+    if (task.deadline < closestTask.deadline) {
+      closestTask = task;
+    } else if (task.deadline === closestTask.deadline) {
+      if (task.priority > closestTask.priority) {
+        closestTask = task;
+      }
+    }
+  }
+
+  return closestTask;
+}
+
+// test
+const tasks: Task[] = [
+  {
+    id: 1,
+    name: 'task1',
+    deadline: new Date('2021-06-01'),
+    priority: 1,
+  },
+  {
+    id: 2,
+    name: 'task2',
+    deadline: new Date('2021-06-02'),
+    priority: 2,
+  },
+  {
+    id: 3,
+    name: 'task3',
+    deadline: new Date('2021-06-02'),
+    priority: 1,
+  },
+  {
+    id: 4,
+    name: 'task4',
+    deadline: new Date('2021-06-03'),
+    priority: 3,
+  },
+];
+
+console.log(findClosestDeadlineTask(tasks)); // { id: 2, name: 'task2', deadline: 2021-06-02T00:00:00.000Z, priority: 2 }
+
+// test with empty list
+console.log(findClosestDeadlineTask([])); // null
+
+// test with one task
+console.log(
+  findClosestDeadlineTask([
+    {
+      id: 1,
+      name: 'task1',
+      deadline: new Date('2021-06-01'),
+      priority: 1,
+    },
+  ])
+); // { id: 1, name: 'task1', deadline: 2021-06-01T00:00:00.000Z, priority: 1 }
+
+// test with two tasks with the same deadline
+console.log(
+  findClosestDeadlineTask([
+    {
+      id: 1,
+      name: 'task1',
+      deadline: new Date('2021-06-01'),
+      priority: 1,
+    },
+    {
+      id: 2,
+      name: 'task2',
+      deadline: new Date('2021-06-01'),
+      priority: 2,
+    },
+  ])
+); // { id: 2, name: 'task2', deadline: 2021-06-01T00:00:00.000Z, priority: 2 }
+
+// test with two tasks with the same deadline and priority
+console.log(
+  findClosestDeadlineTask([
+    {
+      id: 1,
+      name: 'task1',
+      deadline: new Date('2021-06-01'),
+      priority: 1,
+    },
+    {
+      id: 2,
+      name: 'task2',
+      deadline: new Date('2021-06-01'),
+      priority: 1,
+    },
+  ])
+); // { id: 1, name: 'task1', deadline: 2021-06-01T00:00:00.000Z, priority: 1 }
+
+
+-------------------------------------------------------------------------------
+
+
+for (let i = 1; i < tasks.length; i++) {
+    const task = tasks[i];
+    if (task.deadline < closestTask.deadline) {
+      closestTask = task;
+    } else if (task.deadline === closestTask.deadline) {
+      if (task.priority > closestTask.priority) {
+        closestTask = task;
+      }
+    }
+  }
+  
+ // above for loop can be replaced with enhanced for loop 
+ for (const task of tasks) {
+    if (task.deadline < closestTask.deadline) {
+      closestTask = task;
+    } else if (task.deadline === closestTask.deadline) {
+      if (task.priority > closestTask.priority) {
+        closestTask = task;
+      }
+    }
+  }
 ___________________________________________________________________________
 
 
