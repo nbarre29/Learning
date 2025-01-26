@@ -1,0 +1,5 @@
+->COUNT(*) takes all columns to count rows and COUNT(1) counts using the first column: Primary Key. 
+COUNT(1) is able to use index to count rows and it's much faster.
+
+
+https://www.youtube.com/watch?v=7GVFYt6_ZFM&list=PL08903FB7ACA1C2FB

@@ -1,0 +1,351 @@
+In Eclipse create New Maven project -> Create a simple project (skip archetype selection)
+Here AppConfig is the project name and App1 is the App1.java main class
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.radian</groupId>
+	<artifactId>AppConfig</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<build>
+		<finalName>configs</finalName>
+
+		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>3.3.0</version>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<source>17</source>
+					<target>17</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>com.naveen.App1</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+</project>
+--------------------------------------------------------------------------
+
+package com.naveen;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+public class App1 {
+
+	public static void main(String[] args) {
+		
+		try(InputStream input = new FileInputStream("C:\\Users\\shrav\\Desktop\\config.properties")) {
+			
+			Properties prop = new Properties();			
+			prop.load(input);
+			
+			//get the property value and print it out
+			System.out.println(prop.getProperty("db.url"));
+			System.out.println(prop.getProperty("db.user"));
+			System.out.println(prop.getProperty("db.password"));
+			
+		} catch (FileNotFoundException  ex) {
+			System.out.println("Sorry, unable to find config.properties");
+			ex.printStackTrace();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		
+
+	}
+
+}
+
+
+References:
+https://maven.apache.org/plugins/maven-assembly-plugin/usage.html
+
+config.properties
+
+#Demonstrate reading from Properties file
+db.password=password
+db.user=naveen
+db.url=localhost
+__________________________________________________________________________
+package com.naveen;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+
+public class App1 {
+
+	public static void main(String[] args) {
+		
+		try(BufferedReader input = new BufferedReader(new FileReader("C:\\Users\\shrav\\Desktop\\config.properties"))) {
+			
+			Properties prop = new Properties();			
+			prop.load(input);
+			
+			//get the property value and print it out
+			System.out.println(prop.getProperty("db.url"));
+			System.out.println(prop.getProperty("db.user"));
+			System.out.println(prop.getProperty("db.password"));
+			
+		} catch (FileNotFoundException  ex) {
+			System.out.println("Sorry, unable to find config.properties");
+			ex.printStackTrace();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		
+
+	}
+
+}
+__________________________________________________________________________
+https://mkyong.com/java/java-read-a-file-from-resources-folder/
+
+import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.util.List;
+
+
+public class FileResourcesUtils {
+
+    public static void main(String[] args) throws IOException,URISyntaxException {
+
+        FileResourcesUtils app = new FileResourcesUtils();
+
+        String fileName = "config.properties";  
+        
+        System.out.println("\ngetResource : " + fileName);
+        File file = app.getFileFromResource(fileName);
+        printFile(file);
+
+    }    
+
+    private File getFileFromResource(String fileName) throws URISyntaxException{
+
+        ClassLoader classLoader = getClass().getClassLoader();
+        URL resource = classLoader.getResource(fileName);
+        if (resource == null) {
+            throw new IllegalArgumentException("file not found! " + fileName);
+        } else {        
+            return new File(resource.toURI());
+        }
+
+    }
+
+    // print a file
+    private static void printFile(File file) {
+
+        List<String> lines;
+        try {
+            lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
+            lines.forEach(System.out::println);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+}
+__________________________________________________________________________
+public class Ternary {
+    public static void main(String[] args) {
+        String message = true ? "Naveen" : "Barre";
+        System.out.println(message);
+    }
+}
+--------------------------------------------------------------------------
+import java.util.Scanner;
+
+public class Ternary {
+    public static void main(String[] args) {
+        int age;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter your age: ");
+        age = scanner.nextInt();
+
+        String message = (age >= 18) ? "You are eligible to vote" : "You are not eligible to vote";
+        System.out.println(message);
+    }
+}
+--------------------------------------------------------------------------
+public class Ternary {
+    public static void main(String[] args) {
+        int age = 19;
+
+        String message = (age >= 18) ? "You are eligible to vote" : "You are not eligible to vote";
+        System.out.println(message);
+    }
+}
+--------------------------------------------------------------------------
+public class Ternary {
+    public static void main(String[] args) {
+        int age = 61;
+
+        String message = (age < 18) ? "You are too young to work"
+                : (age >= 18 && age <= 60) ? "You are eligible to work" : "You are too old to work";
+        System.out.println(message);
+    }
+}
+--------------------------------------------------------------------------
+public class Ternary {
+    public static void main(String[] args) {
+        int marks = 75;
+
+        String message = (marks >= 80) ? "Your grade is A+"
+                : "You need " + (80 - marks) + " to get A+";
+        System.out.println(message);
+    }
+}
+--------------------------------------------------------------------------
+public class Ternary {
+    public static void main(String[] args) {
+        int marks = 75;
+
+        String grade = (marks >= 90) ? "Your grade is A+" :
+                (marks >= 80) ? "Your grade is B+" :
+                        (marks >= 75) ? "Your grade is C+" :
+                                (marks >= 70) ? "Your grade is D" : "You have failed";
+        System.out.println(grade);
+    }
+}
+--------------------------------------------------------------------------
+public class Ternary {
+    public static void main(String[] args) {
+        String name = "Naveen Barre";
+        int id = 22;
+
+        String val = ("Naveen Barre".equals(name) && id == 22) ? "correct member" : "incorrect member";
+        System.out.println(val);
+    }
+}
+__________________________________________________________________________
+
+https://www.youtube.com/watch?v=ZbAVoypAIbE&t=153s  ( IntelliJ IDEA: Debugger Upskill )
+
+import java.util.Objects;
+
+public class Student {
+
+    private final int id;
+    private final String name;
+
+    public Student(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Student student = (Student) o;
+
+        if (id != student.id) return false;
+        return Objects.equals(name, student.name);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
+    }
+}
+
+--------------------------------------------------------------------------
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ProcessStudentData {
+    public static void main(String[] args) {
+        List<Student> students = new ArrayList<>();
+
+        Student student1 = new Student(1, "Haryyn");
+        Student student2 = new Student(2, "Shreya");
+
+        students.add(student1);
+        students.add(student2);
+
+        fixSpellingErrorInStudentList(students, 1, "Haryyn", "Harry");
+        System.out.println(students);
+
+    }
+     
+	// if we do not override the equals() method in Student class we will not get the desired output 
+    private static void fixSpellingErrorInStudentList(List<Student> studentList,
+                                                      int studentID,
+                                                      String oldName,
+                                                      String correctName) {
+        int index = studentList.indexOf(new Student(studentID, oldName));
+
+        if (index != -1) {
+            studentList.set(index, new Student(studentID, correctName));
+        }
+    }
+}
+__________________________________________________________________________
+
+
+
+
+
+
+
+
+
+
+__________________________________________________________________________
+--------------------------------------------------------------------------

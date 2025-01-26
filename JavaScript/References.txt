@@ -1,0 +1,27 @@
+https://www.youtube.com/@freecodecamp:
+https://www.youtube.com/watch?v=jS4aFq5-91M&t=5568s  (JavaScript Programming - Full Course)
+
+https://www.youtube.com/watch?v=qwfE7fSVaZM&t=19879s (Node.js / Express Course - Build 4 Projects)
+
+https://www.youtube.com/watch?v=1YU83Lw58eo&list=PLillGF-RfqbZ2ybcoD2OaabW2P7Ws8CWu&index=42 (Write A ChatGPT Chatbot With Node.js)
+
+
+___________________________________________________________________________
+
+
+VS Code plugins:
+1) Tabnine AI Autocomplete for Javascript, Python, Typescript, PHP, Go, Java
+https://marketplace.visualstudio.com/items?itemName=TabNine.tabnine-vscode
+2) Visual Studio Code WSL
+The WSL extension lets you use VS Code on Windows to build Linux applications that run on the Windows Subsystem for Linux (WSL). You get all the productivity of Windows while developing with Linux-based tools, runtimes, and utilities.
+3) https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer
+4) https://www.youtube.com/shorts/yZKyGDvkPQM (Top 5 VS Code Extensions!) 
+5) https://www.youtube.com/watch?v=ezhugY8TJDU (10 Helpful VS Code Extensions for JavaScript)
+
+
+___________________________________________________________________________
+
+https://github.com/babel/babel
+
+
+

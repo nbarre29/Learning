@@ -1,0 +1,598 @@
+https://docs.oracle.com/javase/tutorial/java/IandI/examples/Card.java
+https://docs.oracle.com/javase/tutorial/java/IandI/examples/Deck.java
+https://docs.oracle.com/javase/tutorial/java/IandI/examples/DisplayDeck.java
+https://docs.oracle.com/javase/8/docs/technotes/guides/language/assert.html
+https://javadoc.io/doc/io.earcam.wrapped/jdk.compiler/latest/com/sun/tools/javac/util/Assert.html
+
+public class Card {
+    private final int rank;
+    private final int suit;
+
+    // Kinds of suits
+    public final static int DIAMONDS = 1;
+    public final static int CLUBS    = 2;
+    public final static int HEARTS   = 3;
+    public final static int SPADES   = 4;
+
+    // Kinds of ranks
+    public final static int ACE   = 1;
+    public final static int DEUCE = 2;
+    public final static int THREE = 3;
+    public final static int FOUR  = 4;
+    public final static int FIVE  = 5;
+    public final static int SIX   = 6;
+    public final static int SEVEN = 7;
+    public final static int EIGHT = 8;
+    public final static int NINE  = 9;
+    public final static int TEN   = 10;
+    public final static int JACK  = 11;
+    public final static int QUEEN = 12;
+    public final static int KING  = 13;
+
+    public Card(int rank, int suit) {
+        assert isValidRank(rank);
+        assert isValidSuit(suit);
+        this.rank = rank;
+        this.suit = suit;
+    }
+
+    public int getSuit() {
+        return suit;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public static boolean isValidRank(int rank) {
+        return ACE <= rank && rank <= KING;
+    }
+
+    public static boolean isValidSuit(int suit) {
+        return DIAMONDS <= suit && suit <= SPADES;
+    }
+
+    public static String rankToString(int rank) {
+        switch (rank) {
+        case ACE:
+            return "Ace";
+        case DEUCE:
+            return "Deuce";
+        case THREE:
+            return "Three";
+        case FOUR:
+            return "Four";
+        case FIVE:
+            return "Five";
+        case SIX:
+            return "Six";
+        case SEVEN:
+            return "Seven";
+        case EIGHT:
+            return "Eight";
+        case NINE:
+            return "Nine";
+        case TEN:
+            return "Ten";
+        case JACK:
+            return "Jack";
+        case QUEEN:
+            return "Queen";
+        case KING:
+            return "King";
+        default:
+            //Handle an illegal argument.  There are generally two
+            //ways to handle invalid arguments, throwing an exception
+            //(see the section on Handling Exceptions) or return null
+            return null;
+        }    
+    }
+    
+    public static String suitToString(int suit) {
+        switch (suit) {
+        case DIAMONDS:
+            return "Diamonds";
+        case CLUBS:
+            return "Clubs";
+        case HEARTS:
+            return "Hearts";
+        case SPADES:
+            return "Spades";
+        default:
+            return null;
+        }    
+    }
+
+    public static void main(String[] args) {
+    	
+    	// must run program with -ea flag (java -ea ..) to
+    	// use assert statements
+        assert rankToString(ACE) == "Ace";
+        assert rankToString(DEUCE) == "Deuce";
+        assert rankToString(THREE) == "Three";
+        assert rankToString(FOUR) == "Four";
+        assert rankToString(FIVE) == "Five";
+        assert rankToString(SIX) == "Six";
+        assert rankToString(SEVEN) == "Seven";
+        assert rankToString(EIGHT) == "Eight";
+        assert rankToString(NINE) == "Nine";
+        assert rankToString(TEN) == "Ten";
+        assert rankToString(JACK) == "Jack";
+        assert rankToString(QUEEN) == "Queen";
+        assert rankToString(KING) == "King";
+
+        assert suitToString(DIAMONDS) == "Diamonds";
+        assert suitToString(CLUBS) == "Clubs";
+        assert suitToString(HEARTS) == "Hearts";
+        assert suitToString(SPADES) == "Spades";
+
+    }
+}
+
+--------------------------------------------------------------------------
+public class Deck {
+
+    public static int numSuits = 4;
+    public static int numRanks = 13;
+    public static int numCards = numSuits * numRanks;
+
+    private Card[][] cards;
+
+    public Deck() {
+        cards = new Card[numSuits][numRanks];
+        for (int suit = Card.DIAMONDS; suit <= Card.SPADES; suit++) {
+            for (int rank = Card.ACE; rank <= Card.KING; rank++) {
+                cards[suit-1][rank-1] = new Card(rank, suit);
+            }
+        }
+    }
+
+    public Card getCard(int suit, int rank) {
+        return cards[suit-1][rank-1];
+    }
+}
+--------------------------------------------------------------------------
+
+public class DisplayDeck {
+    public static void main(String[] args) {
+        Deck deck = new Deck();
+        for (int suit = Card.DIAMONDS; suit <= Card.SPADES; suit++) {
+            for (int rank = Card.ACE; rank <= Card.KING; rank++) {
+                Card card = deck.getCard(suit, rank);
+                System.out.format("%s of %s%n",
+                    Card.rankToString(card.getRank()),
+                    Card.suitToString(card.getSuit()));
+            }
+        }
+    }
+}
+
+__________________________________________________________________________
+
+https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html
+https://docs.oracle.com/javase/tutorial/java/IandI/examples/defaultmethods/Card.java
+https://docs.oracle.com/javase/tutorial/java/IandI/examples/defaultmethods/Deck.java
+https://docs.oracle.com/javase/tutorial/java/IandI/examples/defaultmethods/PlayingCard.java
+https://docs.oracle.com/javase/tutorial/java/IandI/examples/defaultmethods/SortByRankThenSuit.java
+https://docs.oracle.com/javase/tutorial/java/IandI/examples/defaultmethods/StandardDeck.java
+
+public interface Card extends Comparable<Card> {
+    
+    public enum Suit { 
+        DIAMONDS (1, "Diamonds"), 
+        CLUBS    (2, "Clubs"   ), 
+        HEARTS   (3, "Hearts"  ), 
+        SPADES   (4, "Spades"  );
+        
+        private final int value;
+        private final String text;
+        Suit(int value, String text) {
+            this.value = value;
+            this.text = text;
+        }
+        public int value() {return value;}
+        public String text() {return text;}
+    }
+    
+    public enum Rank { 
+        DEUCE  (2 , "Two"  ),
+        THREE  (3 , "Three"), 
+        FOUR   (4 , "Four" ), 
+        FIVE   (5 , "Five" ), 
+        SIX    (6 , "Six"  ), 
+        SEVEN  (7 , "Seven"),
+        EIGHT  (8 , "Eight"), 
+        NINE   (9 , "Nine" ), 
+        TEN    (10, "Ten"  ), 
+        JACK   (11, "Jack" ),
+        QUEEN  (12, "Queen"), 
+        KING   (13, "King" ),
+        ACE    (14, "Ace"  );
+        private final int value;
+        private final String text;
+        Rank(int value, String text) {
+            this.value = value;
+            this.text = text;
+        }
+        public int value() {return value;}
+        public String text() {return text;}
+    }
+    
+    public Card.Suit getSuit();
+    public Card.Rank getRank();
+}
+
+--------------------------------------------------------------------------
+import java.util.*;
+ 
+public interface Deck {
+    
+    List<Card> getCards();
+    Deck deckFactory();
+    int size();
+    void addCard(Card card);
+    void addCards(List<Card> cards);
+    void addDeck(Deck deck);
+    void shuffle();
+    void sort();
+    void sort(Comparator<Card> c);
+    String deckToString();
+
+    Map<Integer, Deck> deal(int players, int numberOfCards)
+        throws IllegalArgumentException;
+
+}
+
+--------------------------------------------------------------------------
+ 
+public class PlayingCard implements Card {
+    
+    private Card.Rank rank;
+    private Card.Suit suit;
+
+    public PlayingCard(Card.Rank rank, Card.Suit suit) {
+        this.rank = rank;
+        this.suit = suit;
+    }
+    
+    public Card.Suit getSuit() {
+        return suit;
+    }
+
+    public Card.Rank getRank() {
+        return rank;
+    }
+    
+    public boolean equals(Object obj) {
+        if (obj instanceof Card) {
+            if (((Card)obj).getRank() == this.rank &&
+                ((Card)obj).getSuit() == this.suit) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    
+
+    public int hashCode() {
+        return ((suit.value()-1)*13)+rank.value();
+    }
+
+    public int compareTo(Card o) {
+        return this.hashCode() - o.hashCode();
+    }
+
+    public String toString() {
+        return this.rank.text() + " of " + this.suit.text();
+    }
+
+    public static void main(String... args) {
+        new PlayingCard(Rank.ACE, Suit.DIAMONDS);
+        new PlayingCard(Rank.KING, Suit.SPADES);
+    }
+}
+
+--------------------------------------------------------------------------
+import java.util.*;
+
+public class SortByRankThenSuit implements Comparator<Card> {
+    public int compare(Card firstCard, Card secondCard) {
+        int compVal =
+            firstCard.getRank().value() - secondCard.getRank().value();
+        if (compVal != 0)
+            return compVal;
+        else
+            return firstCard.getSuit().value() - secondCard.getSuit().value(); 
+    }
+}
+--------------------------------------------------------------------------
+import java.util.*;
+import java.util.stream.*;
+
+public class StandardDeck implements Deck {
+    
+    private List<Card> entireDeck;
+
+    public StandardDeck(List<Card> existingList) {
+        this.entireDeck = existingList;
+    }
+    
+    public StandardDeck() {
+        this.entireDeck = new ArrayList<>();
+        for (Card.Suit s : Card.Suit.values()) {
+            for (Card.Rank r : Card.Rank.values()) {
+               this.entireDeck.add(new PlayingCard(r, s));
+            }
+        }
+    }
+    
+    public Deck deckFactory() {
+        return new StandardDeck(new ArrayList<Card>());
+    }
+    
+    public int size() {
+        return entireDeck.size();
+    }
+    
+    public List<Card> getCards() {
+        return entireDeck;
+    }
+    
+    public void addCard(Card card) {
+        entireDeck.add(card);
+    }
+
+    public void addCards(List<Card> cards) {
+        entireDeck.addAll(cards);
+    }
+
+    
+    public void addDeck(Deck deck) {
+        List<Card> listToAdd = deck.getCards();
+        entireDeck.addAll(listToAdd);
+    }
+
+    public void sort() {
+        Collections.sort(entireDeck);
+    }
+    
+    public void sort(Comparator<Card> c) {
+        Collections.sort(entireDeck, c);
+    }    
+
+    public void shuffle() {
+        Collections.shuffle(entireDeck);
+    }
+    
+    public Map<Integer, Deck> deal(int players, int numberOfCards)
+        throws IllegalArgumentException
+    {
+        int cardsDealt = players * numberOfCards;
+        int sizeOfDeck = entireDeck.size();
+        if (cardsDealt > sizeOfDeck) {
+            throw new IllegalArgumentException(
+                "Number of players (" + players +
+                ") times number of cards to be dealt (" + numberOfCards +
+                ") is greater than the number of cards in the deck (" +
+                sizeOfDeck + ").");
+        }
+        
+        Map<Integer, List<Card>> dealtDeck = entireDeck
+           .stream()
+           .collect(
+               Collectors.groupingBy(
+                   card -> {
+                       int cardIndex = entireDeck.indexOf(card);
+                       if (cardIndex >= cardsDealt) return (players + 1);
+                       else return (cardIndex % players) + 1;
+                   }));
+        
+        // Convert Map<Integer, List<Card>> to Map<Integer, Deck>
+        Map<Integer, Deck> mapToReturn = new HashMap<>();
+           
+        for (int i = 1; i <= (players + 1); i++) {
+            Deck currentDeck = deckFactory();
+            currentDeck.addCards(dealtDeck.get(i));
+            mapToReturn.put(i, currentDeck);
+        }
+        return mapToReturn;
+    }
+    
+    public String deckToString() {
+        return this.entireDeck
+            .stream()
+            .map(Card::toString)
+            .collect(Collectors.joining("\n"));
+    }
+    
+    public static void main(String... args) {
+        StandardDeck myDeck = new StandardDeck();
+        System.out.println("Creating deck:");
+        myDeck.sort();
+        System.out.println("Sorted deck");
+        System.out.println(myDeck.deckToString());
+        myDeck.shuffle();
+        myDeck.sort(new SortByRankThenSuit());
+        System.out.println("Sorted by rank, then by suit");
+        System.out.println(myDeck.deckToString());        
+        myDeck.shuffle();
+        myDeck.sort(
+            Comparator.comparing(Card::getRank)
+                .thenComparing(Comparator.comparing(Card::getSuit)));
+        System.out.println("Sorted by rank, then by suit " +
+            "with static and default methods");
+        System.out.println(myDeck.deckToString());        
+        myDeck.sort(
+            Comparator.comparing(Card::getRank)
+                .reversed()
+                .thenComparing(Comparator.comparing(Card::getSuit)));
+        System.out.println("Sorted by rank reversed, then by suit " +
+            "with static and default methods");
+        System.out.println(myDeck.deckToString());
+    }
+}
+__________________________________________________________________________
+https://docs.oracle.com/javase/8/docs/technotes/guides/language/enums.html
+https://stackoverflow.com/questions/13659217/where-is-the-documentation-for-the-values-method-of-enum
+
+import java.util.*;
+
+public class Card {
+    public enum Rank { DEUCE, THREE, FOUR, FIVE, SIX,
+        SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE }
+
+    public enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }
+
+    private final Rank rank;
+    private final Suit suit;
+    private Card(Rank rank, Suit suit) {
+        this.rank = rank;
+        this.suit = suit;
+    }
+
+    public Rank rank() { return rank; }
+    public Suit suit() { return suit; }
+    public String toString() { return rank + " of " + suit; }
+
+    private static final List<Card> protoDeck = new ArrayList<Card>();
+
+    // Initialize prototype deck
+    static {
+        for (Suit suit : Suit.values())
+            for (Rank rank : Rank.values())
+                protoDeck.add(new Card(rank, suit));
+    }
+
+    public static ArrayList<Card> newDeck() {
+        return new ArrayList<Card>(protoDeck); // Return copy of prototype deck
+    }
+}
+
+--------------------------------------------------------------------------
+import java.util.*;
+
+public class Deal {
+    public static void main(String args[]) {
+        try {
+			int numHands = Integer.parseInt(args[0]);
+			int cardsPerHand = Integer.parseInt(args[1]);
+			List<Card> deck  = Card.newDeck();
+			Collections.shuffle(deck);
+			for (int i=0; i < numHands; i++)
+			    System.out.println(deal(deck, cardsPerHand));
+		} catch (NumberFormatException e) {			
+			System.out.println("NumberFormatException: Please enter an integer command line argument");
+		}
+    }
+
+    public static ArrayList<Card> deal(List<Card> deck, int n) {
+         int deckSize = deck.size();
+         List<Card> handView = deck.subList(deckSize-n, deckSize);
+         ArrayList<Card> hand = new ArrayList<Card>(handView);
+         handView.clear();
+         return hand;
+     }
+}
+__________________________________________________________________________
+https://docs.oracle.com/javase/tutorial/collections/interfaces/list.html
+https://docs.oracle.com/javase/tutorial/collections/interfaces/examples/Deal.java
+
+import java.util.*;
+
+public class Deal {
+  public static void main(String[] args) {
+    if (args.length < 2) {
+      System.out.println("Usage: Deal hands cards");
+      return;
+    }
+    int numHands = Integer.parseInt(args[0]);
+    int cardsPerHand = Integer.parseInt(args[1]);
+    
+    // Make a normal 52-card deck.
+    String[] suit = new String[] {
+        "spades", "hearts", "diamonds", "clubs" };
+    String[] rank = new String[] {
+        "ace","2","3","4","5","6","7","8",
+        "9","10","jack","queen","king" };
+    List<String> deck = new ArrayList<String>();
+    for (int i = 0; i < suit.length; i++)
+      for (int j = 0; j < rank.length; j++)
+        deck.add(rank[j] + " of " + suit[i]);
+    
+    // Shuffle the deck.
+    Collections.shuffle(deck);
+    
+    if (numHands * cardsPerHand > deck.size()) {
+      System.out.println("Not enough cards.");
+      return;
+    }
+    
+    for (int i=0; i < numHands; i++)
+      System.out.println(dealHand(deck, cardsPerHand));
+  }
+  
+  public static <E> List<E> dealHand(List<E> deck, int n) {
+    int deckSize = deck.size();
+    List<E> handView = deck.subList(deckSize - n, deckSize);
+    List<E> hand = new ArrayList<E>(handView);
+    handView.clear();
+    return hand;
+  }
+}
+__________________________________________________________________________
+https://docs.oracle.com/javase/tutorial/java/IandI/objectclass.html
+public class Book {
+	private String ISBN;
+
+	
+	public String getISBN() {
+		return ISBN;
+	}
+
+	public Book(String ISBN) {
+		this.ISBN = ISBN;
+	}
+	
+	public boolean equals(Object obj) {
+        if (obj instanceof Book)
+            return ISBN.equals(((Book) obj).getISBN()); 
+        else
+            return false;
+    }
+	
+	// I have used Eclipse hashCode override here. We can use Eclipse to override equals() and hashCode()
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((ISBN == null) ? 0 : ISBN.hashCode());
+		return result;
+	}	
+	
+	
+
+	public static void main(String[] args) {
+		Book firstBook  = new Book("0201914670");
+		Book secondBook = new Book("0201914670");
+		if (firstBook.equals(secondBook)) {
+		    System.out.println("objects are equal");
+		} else {
+		    System.out.println("objects are not equal");
+		}
+
+	}
+
+}
+
+This program displays objects are equal even though firstBook and secondBook reference two distinct objects. They are considered equal because the objects compared contain the same ISBN number.
+__________________________________________________________________________
+
+__________________________________________________________________________
+__________________________________________________________________________
+__________________________________________________________________________
+--------------------------------------------------------------------------
+
+--------------------------------------------------------------------------

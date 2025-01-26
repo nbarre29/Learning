@@ -1,0 +1,32 @@
+https://www.youtube.com/watch?v=B5Y4yep3zmY (VSCode - Customize your keyboard shortcuts)
+https://www.youtube.com/watch?v=GmdN0kQ2rIs (10 Essential Keyboard Shortcuts For Programmers)
+https://www.youtube.com/watch?v=phC-vKlNoaM (Become a VSCode Pro: Essential Features and Shortcuts)
+https://www.youtube.com/watch?v=sEPN24Sg0SY (VS Code tips — Multiline find replace)
+https://www.youtube.com/watch?v=DL0HB_qlSVk (Use these shortcuts for selecting text in VS Code!)
+
+
+
+https://stackoverflow.com/tags
+https://stackoverflow.com/questions/tagged/ejs
+https://stackoverflow.com/questions/tagged/node.js
+
+
+https://www.youtube.com/@MonsterlessonsAcademy/videos
+
+
+https://www.youtube.com/watch?v=2oFKNL7vYV8 (Getting started with Node.js debugging in VS Code)
+https://github.com/gtsopour/nodejs-shopping-cart/tree/master
+https://www.youtube.com/watch?v=qz68RsESlp8 (How to use the Debugger in VSCode to debug Node.js Applications)
+https://www.youtube.com/watch?v=i9hOCvBDMMg  (Debugging in Node.js is SO much better with this one trick)
+https://www.builder.io/blog/debug-nodejs
+
+
+https://www.youtube.com/watch?v=4zdBk6wisxc (THIS is EASY TypeScript Setup in VSCode)
+https://www.youtube.com/watch?v=H91aqUHn8sE (How to Setup Node.js with TypeScript in 2023)
+https://www.youtube.com/watch?v=I6_ka5fMQCo (Dependency Injection in NodeJS)
+https://www.youtube.com/watch?v=PB3pbXsdLdc (PART 2 - Dependency Injection in Typescript (BUILD CLEANER BACKENDS!))
+
+
+
+
+

@@ -1,0 +1,18 @@
+https://www.youtube.com/watch?v=XgRGI0Pw2mM  (How To Install Docker on Windows? A Step-by-Step Guide)
+https://www.youtube.com/watch?v=H8Lyj2D_cWo (What is Docker? Simply Explained by Shradha Ma'am)
+https://www.youtube.com/watch?v=31k6AtW-b3Y (Docker In One Shot - Part 1)
+
+
+
+
+https://www.java67.com/2012/08/can-we-override-private-method-in-java.html
+https://www.java67.com/2012/08/can-we-override-static-method-in-java.html
+https://www.educative.io/edpresso/what-is-dynamic-method-dispatch-in-java
+
+
+https://spring.io/blog/2014/03/07/deploying-spring-boot-applications
+
+https://www.youtube.com/watch?v=0Zlh56mTS6c (How To: Automatically generate UML diagrams from javacode)
+https://www.youtube.com/watch?v=_Z3eIy5nRgQ (Automatically Convert Java code into UML)
+
+https://www.javawebtutor.com/articles/jaxb/jaxb_java_class_from_xsd.php (Generate Java Class from xml Schema in Eclipse)

@@ -1,0 +1,33 @@
+Building a RESTful Web Service
+https://spring.io/guides/gs/rest-service/
+
+mvn clean package
+mvn clean test
+mvn spring-boot:run
+
+https://maven.apache.org/surefire/maven-surefire-plugin/examples/skipping-tests.html
+
+
+mvn clean package -DskipTests
+mvn clean package -DskipTests=false
+mvn clean package -Dmaven.test.skip=true  ( We can also use the maven.test.skip property to skip compiling the tests )
+
+
+References:
+https://spring.io/blog/2014/03/07/deploying-spring-boot-applications
+https://github.com/joshlong/the-spring-rest-stack/blob/master/code/web/oauth/src/main/java/com/jl/crm/web/Application.java
+ 
+_____________________________________________________________________
+
+https://www.youtube.com/watch?v=t1-YZ6bF-g0 ( Java 8 STREAMS Tutorial )
+
+
+https://www.youtube.com/watch?v=lbFu9zzmmN4  ( JaCoCo & EclEmma : Java Code Coverage Tutorial )
+
+
+https://www.youtube.com/watch?v=mFY0J5W8Udk ( Hashing Technique - Simplified )
+https://www.youtube.com/watch?v=9TlHvipP5yA ( 1.5.1 Time Complexity #1 )
+https://www.youtube.com/watch?v=kS_gr2_-ws8 (Complete Beginner's Guide to Big O Notation)
+
+
+https://www.cloudfoundry.org/

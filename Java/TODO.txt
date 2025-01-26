@@ -1,0 +1,36 @@
+https://www.oracle.com/technical-resources/articles/java/ma14-java-se-8-streams.html
+https://www.oracle.com/technical-resources/articles/java/architect-streams-pt2.html
+https://www.oracle.com/technical-resources/articles/java/architect-lambdas-part1.html
+https://www.oracle.com/technical-resources/articles/java/architect-lambdas-part2.html
+https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/Lambda-QuickStart/index.html
+https://medium.com/swlh/understanding-java-8s-consumer-supplier-predicate-and-function-c1889b9423d
+https://dzone.com/articles/predicate-and-consumer
+
+
+
+https://github.com/koushikkothagal
+https://github.com/koushikkothagal/Java-8-Lambda-Basics
+
+https://github.com/spring-projects
+
+https://javaee.github.io/
+https://github.com/javaee/jaxb-v2
+https://github.com/eclipse-ee4j/jaxb-ri
+
+
+https://www.youtube.com/watch?v=P1mlC8Ar0_k (Angular 5 tutorial for beginners)
+https://www.youtube.com/watch?v=WEmvT2YFlQw&list=PL6n9fhu94yhVwbuqXKuPzchWNjZ8GVcJa (Git tutorial for beginners)
+
+
+https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html
+
+
+https://www.baeldung.com/spring-security-registration-password-encoding-bcrypt
+https://reflectoring.io/spring-security-password-handling/
+
+
+https://www.youtube.com/watch?v=H0XScE08hy8&t=14s ( Debugging JavaScript - Chrome DevTools 101 )
+
+
+
+

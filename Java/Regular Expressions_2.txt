@@ -1,0 +1,81 @@
+https://mkyong.com/java/java-regular-expression-examples/
+
+-> String.matches(String regex)
+
+//check if the string is a number.
+import java.util.Arrays;
+import java.util.List;
+
+public class JavaRegEx1 {
+
+    public static void main(String[] args) {
+
+        List<String> numbers = Arrays.asList("1", "20", "A1", "333", "A2A211");
+
+        for (String number : numbers) {
+        
+            if (number.matches("\\d+")) {
+                System.out.println(number);		// 1, 20, 333
+            }
+        }
+
+        // Java 8 stream example
+        numbers.stream()
+                .filter(x -> x.matches("\\d+"))
+                .forEach(System.out::println);
+
+    }
+}
+--------------------------------------------------------------------------
+-> String.replaceAll(String regex, String replacement)
+
+//replaces all digits with #
+import java.util.Arrays;
+import java.util.List;
+
+public class JavaRegEx2 {
+
+    public static void main(String[] args) {
+
+        List<String> numbers = Arrays.asList("1", "20", "A1", "333", "A2A211");
+
+        for (String number : numbers) {
+            System.out.println(number.replaceAll("\\d", "#"));
+        }
+
+        // Java 8 stream example
+        numbers.stream()
+                .map(x -> x.replaceAll("\\d", "#"))
+                .forEach(System.out::println);
+
+    }
+}
+--------------------------------------------------------------------------
+
+//Find all digits from a list of strings
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class JavaRegEx3 {
+
+    public static void main(String[] args) {
+
+        List<String> numbers = Arrays.asList("1", "20", "A1", "333", "A2A211");
+
+        Pattern pattern = Pattern.compile("\\d+");
+
+        for (String number : numbers) {
+
+            Matcher matcher = pattern.matcher(number);
+            while (matcher.find()) {
+                System.out.println(matcher.group(0));
+            }
+
+        }
+    
+    }
+}
+__________________________________________________________________________
+

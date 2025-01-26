@@ -1,0 +1,250 @@
+-> user-defined exception
+
+class UserDefinedException extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "UserDefinedException";
+  }
+}
+
+// Example usage:
+function validateInput(value) {
+  if (typeof value !== "number") {
+    throw new UserDefinedException("Input must be a number.");
+  }
+  // Additional validation logic...
+}
+
+try {
+  validateInput("abc");
+} catch (error) {
+  if (error instanceof UserDefinedException) {
+    console.log("User Defined Exception:", error.message);
+  } else {
+    console.log("Other Error:", error.message);
+  }
+}
+
+In this example, the UserDefinedException class is defined by extending the Error class. The constructor takes a message parameter, which is passed to the Error class using super(message). The name property is set to 'UserDefinedException' to identify the specific type of exception.
+
+
+-> user-defined exception
+class CustomException extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "CustomException"; // Set the name for the exception
+  }
+}
+
+// Example usage:
+function divide(a, b) {
+  if (b === 0) {
+    throw new CustomException("Divisor cannot be zero.");
+  }
+
+  return a / b;
+}
+
+try {
+  const result = divide(10, 0);
+  console.log("Result:", result);
+} catch (error) {
+  if (error instanceof CustomException) {
+    console.log("Custom Exception:", error.message);
+  } else {
+    console.log("Other Error:", error.message);
+  }
+}
+
+
+-> Functions and classes:
+
+Functions are used to perform specific tasks. They can be defined with the function keyword, and they can take parameters and return values. Functions are often used to encapsulate code, making it easier to read and maintain.
+Classes are used to create objects. They can be defined with the class keyword, and they can have properties and methods. Classes are often used to represent real-world objects, such as cars, people, or animals.
+
+Feature			Function								Class
+Purpose			To perform specific tasks				To create objects
+Syntax			function myFunction() {}				class MyClass {}
+Parameters		Can take parameters						Can have properties and methods
+Return value	Can return a value						Can return an object
+Inheritance 	Cannot inherit from other functions		Can inherit from other classes
+
+
+->
+function greet(name) {
+    return "Hello, " + name + "!";
+  }
+  
+  console.log(greet("John")); // Output: Hello, John!
+
+
+->
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+
+  greet() {
+    return "Hello, " + this.name + "!";
+  }
+}
+
+const person = new Person("John");
+console.log(person.greet()); // Output: Hello, John!
+
+
+->
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+
+  greet() {
+    return "Hello, " + this.name + "!";
+  }
+}
+
+const person = new Person("John");
+console.log(person.greet()); // Output: Hello, John!
+
+class Student extends Person {
+  constructor(name, studentId) {
+    super(name);
+    this.studentId = studentId;
+  }
+
+  study() {
+    return this.name + " is studying.";
+  }
+}
+
+const student = new Student("Alice", 12345);
+console.log(student.greet()); // Output: Hello, Alice!
+console.log(student.study()); // Output: Alice is studying.
+
+
+-> instanceof:
+
+function Car(make, model, year) {
+  this.make = make;
+  this.model = model;
+  this.year = year;
+}
+const auto = new Car("Honda", "Accord", 1998);
+
+console.log(auto instanceof Car); // Expected output: true
+
+console.log(auto instanceof Object); // Expected output: true
+
+
+-> Above constructor function may be converted to a class declaration.
+
+class Car {
+  constructor(make, model, year) {
+    this.make = make;
+    this.model = model;
+    this.year = year;
+  }
+}
+const auto = new Car("Honda", "Accord", 1998);
+
+console.log(auto instanceof Car); // Expected output: true
+
+console.log(auto instanceof Object); // Expected output: true
+
+
+->
+JavaScript classes were introduced in ECMAScript 2015 (also known as ES6). Prior to ES6, JavaScript used a prototype-based inheritance model, where objects were created using constructor functions and prototypal inheritance.
+
+With the introduction of ES6, JavaScript added a syntax for defining classes, which provides a more familiar object-oriented programming style. The class syntax in JavaScript is primarily syntactical sugar over the existing prototype-based inheritance.
+
+Here's an example of a class definition in JavaScript:
+
+
+class Rectangle {
+  constructor(width, height) {
+    this.width = width;
+    this.height = height;
+  }
+
+  get area() {
+    return this.width * this.height;
+  }
+
+  set area(value) {
+    throw new Error("Area is read-only.");
+  }
+
+  static createSquare(side) {
+    return new Rectangle(side, side);
+  }
+}
+
+const rect = new Rectangle(5, 10);
+console.log(rect.area); // Output: 50
+
+rect.area = 100; // Throws an error due to the setter
+
+const square = Rectangle.createSquare(5);
+console.log(square.area); // Output: 25
+
+
+-> Just added try /catch block for above code.
+
+class Rectangle {
+  constructor(width, height) {
+    this.width = width;
+    this.height = height;
+  }
+
+  get area() {
+    return this.width * this.height;
+  }
+
+  set area(value) {
+    throw new Error("Area is read-only.");
+  }
+
+  static createSquare(side) {
+    return new Rectangle(side, side);
+  }
+}
+
+const rect = new Rectangle(5, 10);
+console.log(rect.area); // Output: 50
+
+try {
+  rect.area = 100;
+} catch (error) {
+  console.log(error.message);
+}
+
+const square = Rectangle.createSquare(5);
+console.log(square.area); // Output: 25
+
+
+->
+To concatenate three arrays in JavaScript, we can use the concat method or the spread operator. Here's how we can do it:
+
+Method 1: Using the concat method
+
+const array1 = [1, 2, 3];
+const array2 = [4, 5, 6];
+const array3 = [7, 8, 9];
+
+const concatenatedArray = array1.concat(array2, array3);
+console.log(concatenatedArray); // Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Method 2: Using the spread operator
+
+const array1 = [1, 2, 3];
+const array2 = [4, 5, 6];
+const array3 = [7, 8, 9];
+
+const concatenatedArray = [...array1, ...array2, ...array3];
+console.log(concatenatedArray); // Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Both methods achieve the same result of combining the elements of the three arrays into a single new array. We need to choose the method that is more readable or suitable for our specific use case.
+
+
+-> 

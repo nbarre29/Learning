@@ -1,0 +1,323 @@
+https://docs.oracle.com/javase/tutorial/datetime/overview/design.html
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
+
+public class Test {
+
+    public static void main(String[] args) {
+    	
+    	LocalDate today = LocalDate.now();
+    	LocalDate payday = today.with(TemporalAdjusters.lastDayOfMonth()).minusDays(2);
+    	System.out.println(payday);
+    }
+}
+--------------------------------------------------------------------------
+Select TemporalAdjusters.lastDayOfMonth() and use the Eclipse shortcut ( Ctrl + 1 ) extract to local variablle
+
+IntelliJ IDEA: Highlight the code you want to extract to a variable and press Ctrl+Alt+V (Windows) to extract it. Extracting parameters can be useful in improving the readability of your code.
+
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
+
+public class Test {
+
+    public static void main(String[] args) {
+    	
+    	LocalDate today = LocalDate.now();
+    	TemporalAdjuster lastDayOfMonth = TemporalAdjusters.lastDayOfMonth();
+		LocalDate payday = today.with(lastDayOfMonth).minusDays(2);
+    	System.out.println(payday);
+    }
+}
+
+
+
+--------------------------------------------------------------------------
+Eclipse shortcut to add static import is select the method or make sure your cursor is on the right side of the period and press Ctrl + Shift + M 
+
+https://www.iitk.ac.in/esc101/05Aug/tutorial/java/interpack/staticimport.html
+Note: Use static import very sparingly, if at all. It's useful for situations when you need frequent access to a few static objects from one or two classes. Overusing static import can result in code that is difficult to read and maintain, since readers of the code won't know which class defines a particular static object. Used properly, it makes code more readable by removing the repetition of class names.
+
+
+import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
+import java.time.LocalDate;
+
+public class Test {
+
+    public static void main(String[] args) {
+    	
+    	LocalDate today = LocalDate.now();
+    	LocalDate payday = today.with(lastDayOfMonth()).minusDays(2);
+    	System.out.println(payday);
+    }
+}
+
+__________________________________________________________________________
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
+
+public class Test {
+    public static void main(String[] args) {    	
+    	LocalDate currentDate = LocalDate.now();
+    	LocalDate nextThursday = currentDate.with(TemporalAdjusters.next(DayOfWeek.THURSDAY));
+    	System.out.println(nextThursday);
+    }
+}
+
+__________________________________________________________________________
+https://docs.oracle.com/javase/tutorial/datetime/iso/instant.html
+
+The Instant class does not work with human units of time, such as years, months, or days. If you want to perform calculations in those units, you can convert an Instant to another class, such as LocalDateTime or ZonedDateTime, by binding the Instant with a time zone. You can then access the value in the desired units. The following code converts an Instant to a LocalDateTime object using the ofInstant method and the default time zone, and then prints out the date and time in a more readable form:
+
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
+public class Test {
+
+	public static void main(String[] args) {
+				
+		Instant timestamp = Instant.now();		
+		LocalDateTime ldt = LocalDateTime.ofInstant(timestamp, ZoneId.systemDefault());
+		System.out.printf("%s %d %d at %d:%d%n", ldt.getMonth(), ldt.getDayOfMonth(), ldt.getYear(), ldt.getHour(),
+				ldt.getMinute());
+		
+		LocalDateTime dateTime = LocalDateTime.now();
+		System.out.printf("%s %d %d at %d:%d%n", dateTime.getMonth(), dateTime.getDayOfMonth(), dateTime.getYear(),
+				dateTime.getHour(), dateTime.getMinute());
+	}
+}
+--------------------------------------------------------------------------
+
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
+public class Test {
+
+	public static void main(String[] args) {				
+		Instant timestamp = Instant.now();	
+		LocalDateTime ldtKolkata = LocalDateTime.ofInstant(timestamp, ZoneId.of("Asia/Kolkata")) ;
+		LocalDateTime ldtNew_York = LocalDateTime.ofInstant(timestamp, ZoneId.of("America/New_York")) ;
+		System.out.println(ldtKolkata);
+		System.out.println(ldtNew_York);	
+	}
+
+}
+--------------------------------------------------------------------------
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
+public class Test {
+
+	public static void main(String[] args) {
+
+		LocalDateTime ldtKolkata = LocalDateTime.now(ZoneId.of("Asia/Kolkata"));
+		System.out.println(ldtKolkata);
+
+		LocalDateTime ldtNew_York = LocalDateTime.now(ZoneId.of("America/New_York"));
+		System.out.println(ldtNew_York);
+
+	}
+
+}
+--------------------------------------------------------------------------
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+
+public class Test {
+
+	public static void main(String[] args) {				
+		Set<String> allZones = ZoneId.getAvailableZoneIds();
+		List<String> zoneList = new ArrayList<String>(allZones);
+		Collections.sort(zoneList);		
+		zoneList.forEach(System.out::println);
+	}
+
+}
+--------------------------------------------------------------------------
+import java.time.ZoneId;
+import java.util.Comparator;
+
+public class Test {
+
+    public static void main(String[] args) {
+        ZoneId.getAvailableZoneIds().stream().forEach(System.out::println);
+        ZoneId.getAvailableZoneIds().stream().sorted().forEach(System.out::println);
+        ZoneId.getAvailableZoneIds().stream().sorted(Comparator.reverseOrder()).forEach(System.out::println);
+
+    }
+
+}
+__________________________________________________________________________
+https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class Test {
+
+	public static void main(String[] args) {
+		LocalDateTime date = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		System.out.println(date.format(formatter));
+		System.out.println(formatter.format(date));
+
+		String text = date.format(formatter);
+		LocalDate parsedDate = LocalDate.parse(text, formatter);
+		System.out.println(parsedDate);
+
+		String text1 = date.format(formatter);
+		LocalDateTime parsedDateTime = LocalDateTime.parse(text1, formatter);
+		System.out.println(parsedDateTime);			 
+	}
+
+}
+--------------------------------------------------------------------------
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+
+public class Test {
+
+	public static void main(String[] args) {
+		
+		LocalDateTime ldt = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		System.out.println(ldt.format(formatter));
+		System.out.println(formatter.format(ldt));  // another way to use ldt.format(formatter) as formatter.format(ldt)
+		
+		Instant timestamp = Instant.now();
+		LocalDateTime ldtIndia = LocalDateTime.ofInstant(timestamp, ZoneId.of("Asia/Kolkata"));
+		System.out.println(ldtIndia.format(formatter));	    
+	}
+
+}
+__________________________________________________________________________
+https://mkyong.com/java8/java-8-zoneddatetime-examples/
+Review a flight information from Malaysia Kuala Lumpur (UTC+08:00) to Japan Tokyo Haneda (UTC+09:00)
+
+---Flight Detail---
+Kuala Lumpur (KUL) -> Tokyo Haneda (HND)
+Flight Duration : 7 hours
+
+(KUL-Depart) 1430, 22 Aug 2016 ->  2230, 22 Aug 2016 (HND-Arrive)
+P.S Japan Tokyo is one hour faster than Malaysia Kuala lumpur
+
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class DifferentTimeZoneExample1 {
+
+    public static void main(String[] args) {
+
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("HHmm, dd MMM yyyy");
+
+        LocalDateTime ldt = LocalDateTime.of(2016, Month.AUGUST, 22, 14, 30);
+        System.out.println("LocalDateTime : " + format.format(ldt));
+
+        //UTC+8
+        ZonedDateTime klDateTime = ldt.atZone(ZoneId.of("Asia/Kuala_Lumpur"));
+        System.out.println("Depart : " + format.format(klDateTime));
+
+        //UTC+9 and flight duration = 7 hours
+        ZonedDateTime japanDateTime = klDateTime.withZoneSameInstant(ZoneId.of("Asia/Tokyo")).plusHours(7);
+        System.out.println("Arrive : " + format.format(japanDateTime));
+
+        System.out.println("\n---Detail---");
+        System.out.println("Depart : " + klDateTime);
+        System.out.println("Arrive : " + japanDateTime);
+
+    }
+
+}
+
+__________________________________________________________________________
+https://mkyong.com/java8/java-8-zoneddatetime-examples/
+Another time zone example from France, Paris (UTC+02:00, DST) to a hard coded (UTC-05:00) time zone (e.g New York)
+
+---Flight Detail---
+France, Paris -> UTC-05:00
+Flight Duration : 8 hours 10 minutes
+
+(Depart) 1430, 22 Aug 2016 ->  1540, 22 Aug 2016 (Arrive)
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class DifferentTimeZoneExample2 {
+
+    public static void main(String[] args) {
+
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("HHmm, dd MMM yyyy");
+
+        //Convert String to LocalDateTime
+        String date = "2016-08-22 14:30";
+        LocalDateTime ldt = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        System.out.println("LocalDateTime : " + format.format(ldt));
+
+        //Paris, 2016 Apr-Oct = DST, UTC+2, other months UTC+1
+        //UTC+2
+        ZonedDateTime parisDateTime = ldt.atZone(ZoneId.of("Europe/Paris"));
+        System.out.println("Depart : " + format.format(parisDateTime));
+
+        //hard code a zoneoffset like this, UTC-5
+        ZoneOffset nyOffSet = ZoneOffset.of("-05:00");
+        ZonedDateTime nyDateTime = parisDateTime.withZoneSameInstant(nyOffSet).plusHours(8).plusMinutes(10);
+        System.out.println("Arrive : " + format.format(nyDateTime));
+
+        System.out.println("\n---Detail---");
+        System.out.println("Depart : " + parisDateTime);
+        System.out.println("Arrive : " + nyDateTime);
+
+    }
+
+}
+
+Daylight Saving Time (DST)
+Paris, normally UTC+1 has DST (add one hour = UTC+2) from 27/mar to 30/Oct, 2016. Review the above output, the java.time is able to calculate and handle the DST correctly.
+__________________________________________________________________________
+// Convert EST time to UTC time
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+
+public class Test {
+    public static void main(String[] args) {
+
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm:ss");
+
+        LocalDateTime estTime = LocalDateTime.now(ZoneId.of("America/New_York"));
+        System.out.println("estTime: " + format.format(estTime));
+
+        LocalDateTime utcTime = estTime.plusHours(4);
+        System.out.println("utcTime: " + format.format(utcTime));
+
+    }
+}
+
+__________________________________________________________________________
+
+__________________________________________________________________________
+
+__________________________________________________________________________
+
+--------------------------------------------------------------------------
+
+--------------------------------------------------------------------------
+
+--------------------------------------------------------------------------
+
+--------------------------------------------------------------------------

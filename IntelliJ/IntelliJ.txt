@@ -1,0 +1,96 @@
+-> "Alt+Insert" Generate constructor, toString, Getter and Setter
+
+-> Navigate between opened files, Ctrl+Tab
+
+-> "Ctrl+F12" Check members of a class
+
+-> "Ctrl+Alt+H" Open in Hierarchy
+
+-> "Ctrl+F4" Close an opened file
+
+-> File - Settings - Editor - General - Auto Import - select the checkbox "Add unambiguous imports on the fly"
+-> File - Settings - Editor - General - Auto Import - select the checkbox "Optimize imports on the fly"
+
+-> Remove unused imports: Code -> Optimize Imports (Ctrl+Alt+O)
+
+-> File - Settings - Editor - General -  Code Completion -select the check box "Show the documentation popup in 1 ms"
+
+-> File - Project Structure - Platform Settings - SDKs - Configure "JDK home path" - In "Sourcepath" tab point to the src.zip
+
+-> Code - Surround with (Ctrl+Alt+T)
+
+-> Highlight the code you want to extract to a variable and press Ctrl+Alt+V, to extract it.
+
+-> https://www.jetbrains.com/help/idea/migrating-from-eclipse-to-intellij-idea.html
+
+-> https://www.jetbrains.com/help/idea/extract-constant.html
+
+-> Settings - Appearance & Behavior - New UI (select the checkbox 'Enable new UI' )
+
+
+
+
+Shift+Ctrl+A (Windows/Linux), to search for any action in IntelliJ IDEA ( We can use this to know the keyboard shortcuts )
+
+Code -> Reformat Code ( Ctrl+Alt+L )
+
+
+https://www.youtube.com/@intellijidea/search?query=code%20completion
+
+https://www.youtube.com/watch?v=ffBeoE6NBSs (IntelliJ IDEA. Write Code Faster Using Live Templates)
+if Ctrl+Shift+Enter  ( add the missing curly brackets. )
+
+
+
+
+https://www.developersoapbox.com/using-spring-boot-with-intellij-community-edition/
+
+
+
+https://www.jetbrains.com/idea/download/#section=windows
+
+https://www.youtube.com/watch?v=H_XxH66lm3U    (Creating your first Java application with IntelliJ IDEA)
+
+
+Configure keyboard shortcuts
+https://www.jetbrains.com/help/idea/configuring-keyboard-and-mouse-shortcuts.html
+
+
+
+Top 5 IntelliJ IDEA Navigation Shortcuts
+https://www.youtube.com/watch?v=crnEBqbBWuo  3:40
+
+Top 15 IntelliJ IDEA shortcuts
+https://www.youtube.com/watch?v=QYO5_riePOQ
+
+IntelliJ IDEA by JetBrains
+https://www.youtube.com/c/intellijidea/videos
+
+
+
+Project name: javatutorial
+Project location: C:\Users\shrav\IdeaProjects\javatutorial
+
+
+
+https://www.jetbrains.com/help/idea/migrating-from-eclipse-to-intellij-idea.html#CodingAssistance
+By default, IntelliJ IDEA doesn't show the Documentation popup for the selected item, but you can enable it in Settings/Preferences | Editor | Code Completion | Show the documentation popup in:
+
+
+https://stackoverflow.com/questions/61075575/is-it-possible-to-access-spring-documentation-from-intellij-ide
+I had to initiate download by Right Click the project ->Maven->Download Documentation. Now it is working perfectly.
+
+https://dzone.com/articles/gradle-goodness-download-javadoc-files-for-depende
+
+https://stackoverflow.com/questions/35762694/how-to-quickly-switch-different-project-in-intellij
+Use search everywhere command (shift + shift) and type Open Recent - you will be able to switch to one of your recent projects.
+
+You could also configure any shortcut you want for this action. To create shortcut, go to Preferences->Keymap and find Main menu->File->Open Recent.
+
+-> To turn on/off GitHub Copilot 
+File -> Settings -> Language & Frameworks -> GitHub Copilot -> check / uncheck "Automatically show completions"
+
+
+
+
+

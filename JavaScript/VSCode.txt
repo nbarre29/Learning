@@ -1,0 +1,14 @@
+-> 
+https://www.youtube.com/watch?v=B5Y4yep3zmY (VSCode - Customize your keyboard shortcuts)
+
+Ctrl + Shift + P -> Open the Command Palette
+
+Ctrl + P -> Go to File
+
+Ctrl + Shift + F -> Find in Files
+
+Shift + Alt + F -> Format Document
+
+Ctrl + Tab -> View: Quick Open Previous Recently Used Editor in Group
+
+Ctrl + W -> View: Close Editor

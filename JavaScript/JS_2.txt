@@ -1,0 +1,422 @@
+-> The spread operator (also known as the spread syntax) is a JavaScript operator denoted by the ellipsis (`...`), is a feature in JavaScript that allows an iterable (like an array or a string) to be expanded into individual elements. It provides a concise way to copy or combine arrays, pass multiple arguments to functions, and create shallow copies of objects.
+
+Here are some of the benefits of using the spread operator:
+a) It can make your code more concise and easier to read.
+b) It can help you avoid code duplication.
+
+Here are some common use cases of the spread syntax:
+
+1) Copying an array:
+const originalArray = [1, 2, 3];
+const copiedArray = [...originalArray];
+console.log(copiedArray); // [1, 2, 3]
+
+2) Combining arrays:
+const array1 = [1, 2, 3];
+const array2 = [4, 5, 6];
+const combinedArray = [...array1, ...array2];
+console.log(combinedArray); // [1, 2, 3, 4, 5, 6]
+
+3) Passing arguments to a function:
+const numbers = [1, 2, 3, 4, 5];
+console.log(Math.max(...numbers)); // 5
+
+4) Creating a shallow copy of an object:
+const originalObject = { name: 'John', age: 30 };
+const copiedObject = { ...originalObject };
+console.log(copiedObject); // { name: 'John', age: 30 }
+
+5) Converting a string to an array of characters:
+const str = 'Hello';
+const chars = [...str];
+console.log(chars); // ['H', 'e', 'l', 'l', 'o']
+
+6) The syntax for the spread operator is three dots ( ... ) followed by the iterable object. For example, the following code expands the elements of the array numbers into the arguments list of the function sum():
+
+const numbers = [1, 2, 3];
+const sum = (a, b, c) => a + b + c;
+console.log(sum(...numbers)); // 6
+
+6a)
+const numbers = [1, 2, 3];
+const sum = (a, b, c) => {
+  console.log("Summing numbers: ", a, b, c);
+  // console.log(`Summing numbers: ${a} , ${b} , ${c}`);
+  return a + b + c;
+};
+console.log(sum(...numbers)); // 6
+
+7) the following code creates a new array that contains the elements of the array numbers plus the number 4:
+const numbers = [1, 2, 3];
+const newArray = [...numbers, 4];
+console.log(newArray); // [1, 2, 3, 4]
+
+
+->
+const functionWithReturnValue = () => {
+  return "hello";
+};
+console.log(functionWithReturnValue());
+
+
+-> In JavaScript, `undefined` is a global property and a primitive value that represents the absence of a value or the uninitialized state of a variable.
+
+Here are some key points about the undefined global property:
+
+1) Value of Uninitialized Variables: When a variable is declared but not assigned a value, its default value is undefined. For example:
+let x;
+console.log(x); // undefined
+
+2) Missing Object Properties: If you access an object property that does not exist, the result will be undefined. For example:
+const person = { name: "John", age: 30 };
+console.log(person.address); // undefined
+
+3) In this example, the variable variable is assigned the value undefined. 
+const variable = undefined;
+console.log(variable); // undefined
+
+4) In this example, the function functionWithoutReturnValue() does not return a value. The console.log() statement then prints the value of functionWithoutReturnValue(), which is undefined.
+const functionWithoutReturnValue = () => undefined;
+console.log(functionWithoutReturnValue()); // undefined
+
+
+-> In JavaScript, NaN stands for "Not a Number" and is a special value that represents an invalid or unrepresentable numeric result. 
+
+Here are some key points about NaN in JavaScript:
+
+1) Invalid Number Operations: NaN is typically the result of operations that involve numbers but are not valid mathematical computations. For example:
+
+const result = 0 / 0; // NaN
+console.log(result);
+
+2) Indeterminate Numeric Results: Certain arithmetic operations can produce NaN when the result is indeterminate or cannot be represented as a finite number. For example:
+
+console.log(Math.sqrt(-1)); // NaN
+console.log(Number("abc")); // NaN
+
+3) Propagation of NaN: Once a value becomes NaN in a numeric operation, further arithmetic operations with NaN will continue to result in NaN. For example:
+
+console.log(NaN + 5); // NaN
+console.log(NaN * 10); // NaN
+
+4) NaN is Not Equal to Anything: Interestingly, NaN is not equal to any other value, including NaN itself. Therefore, you cannot use the equality operators (== and ===) to check for NaN. Instead, you need to use the isNaN() function:
+
+console.log(NaN === NaN); // false
+console.log(isNaN(NaN)); // true
+
+5) Testing for NaN: The isNaN() function can be used to determine if a value is NaN. However, it has some quirks when it comes to non-numeric values. To overcome these quirks and perform a strict numeric check, the Number.isNaN() method was introduced in ECMAScript 6 (ES6):
+
+console.log(isNaN("abc")); // true
+console.log(Number.isNaN("abc")); // false
+
+It's important to handle NaN appropriately in your code, as operations involving NaN can produce unexpected results. You can use the isNaN() or Number.isNaN() functions to check for NaN values and handle them accordingly.
+
+
+-> let and const
+
+let and const are both used to declare variables.
+
+let:
+Variables declared with let are mutable, meaning their values can be reassigned.
+let allows for block-scoping, meaning the variable is only accessible within the block in which it is declared.
+It is typically used when the variable needs to be reassigned or its value might change during the program execution.
+
+Example:
+let count = 5;
+count = 10; // Valid, reassigned the value of count
+
+const:
+Variables declared with const are read-only, meaning their values cannot be reassigned once they are assigned.
+const also allows for block-scoping.
+It is typically used when the variable represents a constant value or a value that should not be modified.
+
+Example:
+const PI = 3.14159;
+PI = 3; // Invalid, trying to reassign a constant variable
+
+It's important to note that while const prevents reassignment of the variable itself, it doesn't make the assigned value immutable. If the assigned value is an object or an array, its properties or elements can still be modified.
+
+const person = {
+  name: "John",
+  age: 25
+};
+
+person.age = 30; // Valid, modifying a property of the object
+
+const numbers = [1, 2, 3];
+numbers.push(4); // Valid, modifying the array
+
+numbers = [5, 6, 7]; // Invalid, trying to reassign the entire array
+
+
+-> 
+const jsonString = '{"name": "John", "age": 30, "city": "New York"}';
+const javascriptObject = JSON.parse(jsonString); 
+console.log(javascriptObject); // { name: 'John', age: 30, city: 'New York' }
+console.log(JSON.stringify(javascriptObject)); //{"name":"John","age":30,"city":"New York"}
+console.log(JSON.stringify({ name: 'John', age: 30, city: 'New York' })); //{"name":"John","age":30,"city":"New York"}
+
+
+-> Destructuring assignment
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#examples
+
+a) In this example, we are using destructuring to unpack the values from the employee object into separate variables. This allows us to access the values of the object without having to use the dot notation.
+
+const employee = {
+  name: 'John',
+  age: 23,
+  country: 'Australia',
+};
+
+// Destructuring employee into separate variables
+const { name, age, country } = employee;
+
+console.log(name); // John
+console.log(age); // 23
+console.log(country); // Australia
+
+b) In this example, we are using destructuring to unpack the first two elements of the names array into two separate variables. This allows us to access the first and second elements of the array without having to use the array index notation.
+
+const names = ['John', 'Peter', 'Jack'];
+
+// Destructuring names into two variables
+const [firstName, lastName] = names;
+
+console.log(firstName); // John
+console.log(lastName); // Peter
+
+c) In the object destructuring example, we're extracting the properties firstName, lastName, age, and city from the person object. We're also aliasing the nested property address.city to city. This allows us to directly access these values without explicitly accessing the object properties.
+
+In the array destructuring example, we're extracting the values 1, 2, and 4 from the numbers array. The third element is skipped using a comma without assigning it to a variable. This is useful when you're only interested in specific elements from an array and want to ignore the rest.
+
+// Object Destructuring
+const person = {
+  firstName: 'John',
+  lastName: 'Doe',
+  age: 30,
+  address: {
+    street: '123 Main St',
+    city: 'New York',
+    country: 'USA'
+  }
+};
+
+// Extracting properties using object destructuring
+const { firstName, lastName, age, address: { city } } = person;
+
+console.log(firstName); // Output: John
+console.log(lastName); // Output: Doe
+console.log(age); // Output: 30
+console.log(city); // Output: New York
+
+
+// Array Destructuring
+const numbers = [1, 2, 3, 4, 5];
+
+// Extracting elements using array destructuring
+const [first, second, , fourth] = numbers;
+
+console.log(first); // Output: 1
+console.log(second); // Output: 2
+console.log(fourth); // Output: 4
+
+
+->
+"NextGen JS" or "Next Generation JavaScript" typically refers to the latest version or features of the JavaScript programming language. JavaScript is continuously evolving, and new features and enhancements are regularly added to the language.
+
+The term "NextGen JS" is not an official designation but rather a colloquial term used to describe the latest advancements and features introduced in JavaScript. It often refers to features introduced in newer ECMAScript (ES) versions, such as ECMAScript 6 (ES6), ECMAScript 2015 (ES2015), ECMAScript 2016 (ES2016), and so on.
+
+Some of the key features introduced in NextGen JS include:
+
+1) Arrow functions: A concise syntax for writing anonymous functions.
+2) Block-scoped variables: The let and const keywords allow declaring block-scoped variables, providing an alternative to the traditional var keyword.
+3) Template literals: Enhanced string literals that support interpolation and multi-line strings.
+4) Destructuring assignment: An elegant way to extract values from objects and arrays into variables.
+5) Spread syntax: The ... operator allows expanding elements of an array or object.
+6) Classes: A new syntax for creating classes and working with inheritance.
+7) Promises: A built-in mechanism for handling asynchronous operations.
+8) Modules: Support for modular code organization and importing/exporting modules.
+These are just a few examples, and there are many more features introduced in NextGen JS. The specific features and version of NextGen JS may vary depending on the ECMAScript specification and the JavaScript engine used in a particular environment (e.g., Node.js or web browsers). It's important to stay updated with the latest versions of JavaScript to make use of the newest features and improvements.
+
+
+-> JavaScript function to sum n numbers by using the arguments object.
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments
+
+function sumNumbers() {
+  var sum = 0;
+
+  for (var i = 0; i < arguments.length; i++) {
+    sum += arguments[i];
+  }
+
+  return sum;
+}
+
+console.log(sumNumbers(1, 2, 3));  // Output: 6
+console.log(sumNumbers(10, 20, 30, 40));  // Output: 100
+console.log(sumNumbers(5, 10, 15, 20, 25));  // Output: 75
+
+
+-> Using arrow function in above code.
+
+const NumberSum = {
+  sumNumbers: (...numbers) => {
+    let sum = 0;
+
+    for (let i = 0; i < numbers.length; i++) {
+      sum += numbers[i];
+    }
+
+    return sum;
+  },
+};
+
+console.log(NumberSum.sumNumbers(1, 2, 3)); // Output: 6
+console.log(NumberSum.sumNumbers(10, 20, 30, 40)); // Output: 100
+console.log(NumberSum.sumNumbers(5, 10, 15, 20, 25)); // Output: 75
+
+In this example, the NumberSum object is created with an arrow function sumNumbers() as its property. The arrow function accepts any number of arguments using the spread syntax (...numbers). It performs the same sum calculation as before.
+
+We can use the sumNumbers() arrow function by calling it on the NumberSum object
+
+
+-> convert the above JavaScript function into a class.
+
+class NumberSum {
+  static sumNumbers(...numbers) {
+    let sum = 0;
+	
+	// for (const number of numbers) { sum += number; }
+    // numbers.forEach(number => { sum += number; });
+    for (let i = 0; i < numbers.length; i++) {      
+      sum += numbers[i];
+    }
+
+    return sum;
+  }
+}
+
+console.log(NumberSum.sumNumbers(1, 2, 3)); // Output: 6
+console.log(NumberSum.sumNumbers(10, 20, 30, 40)); // Output: 100
+console.log(NumberSum.sumNumbers(5, 10, 15, 20, 25)); // Output: 75
+
+In this example, the NumberSum class has a static method sumNumbers() that takes in any number of arguments using the spread syntax (...numbers). It performs the same logic as before, iterating through the numbers array and calculating the sum.
+
+We can use the sumNumbers() method by directly calling it on the NumberSum class.
+
+
+-> 
+const sumOfNumbers = (numbers) => {
+  let sum = 0;
+  for (const number of numbers) {
+    sum += number;
+  }
+  return sum;
+};
+
+const numbers = [1, 2, 3, 4, 5];
+const sum = sumOfNumbers(numbers);
+console.log(sum); // 15
+
+This code first defines a function called sumOfNumbers that takes an array of numbers as input and returns the sum of those numbers. The function uses an arrow function to define its body. The arrow function takes a single argument, numbers, which is the array of numbers to be summed. The function then iterates over the array, adding each number to the sum variable. Finally, the function returns the sum variable.
+
+
+-> 
+class SumOfNumbers {
+  constructor(numbers) {
+    this.numbers = numbers;
+  }
+
+  getSum() {
+    let sum = 0;
+    for (const number of this.numbers) {
+      sum += number;
+    }
+    return sum;
+  }
+}
+
+const numbers = [1, 2, 3, 4, 5];
+const sumOfNumbers = new SumOfNumbers(numbers);
+const sum = sumOfNumbers.getSum();
+console.log(sum); // 15
+
+It is perfectly fine to use const instead of let in the for...of loop for iterating over the this.numbers array. Since the loop variable number is re-assigned for each iteration of the loop, using const ensures that its value remains constant within the scope of each iteration.
+
+
+-> just used Spread syntax (...) in above code.
+class SumOfNumbers {
+  constructor(...numbers) {
+    this.numbers = numbers;
+  }
+
+  getSum() {
+    let sum = 0;
+    for (const number of this.numbers) {
+      sum += number;
+    }
+    return sum;
+  }
+}
+
+// const numbers = [1, 2, 3, 4, 5];
+const sumOfNumbers = new SumOfNumbers(1,2,3,4,5);
+const sum = sumOfNumbers.getSum();
+console.log(sum); // 15
+
+
+-> 
+class SumOfNumbers {
+  constructor(numbers) {
+    this.numbers = numbers;
+  }
+
+  getSum() {
+    return this.numbers.reduce((sum, number) => sum + number, 0);
+  }
+}
+
+const numbers = [1, 2, 3, 4, 5];
+const sumOfNumbers = new SumOfNumbers(numbers);
+const sum = sumOfNumbers.getSum();
+console.log(sum); // 15
+
+The reduce() method allows you to perform the sum calculation in a single pass, eliminating the need for an explicit loop. It uses a callback function and an initial value (0 in this case) to accumulate the sum. This implementation has a time complexity of O(n) as well, but it leverages built-in optimizations and may be more performant.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,70 @@
+https://www.youtube.com/watch?v=QsXWszvjMBM
+
+https://github.com/Microsoft/sql-server-samples/tree/master/samples
+
+CONNECTION STRING: Server=localhost;Database=master;Trusted_Connection=True;
+
+select @@Version
+go
+
+select @@SERVERNAME
+
+USE AdventureWorks2017
+
+
+https://www.youtube.com/watch?v=FTKtNLmiIT0 (How to download and import AdventureWorks sample database for Microsoft SQL Server 2019)
+
+__________________________________________________________________________
+https://www.youtube.com/watch?v=SgGld-VANa4 (Sql Inner Joins and Left Join Adventure Works Examples)
+
+USE AdventureWorks2017
+select *  from Person.Person;
+select * from Person.Address;
+select * from Person.BusinessEntityAddress
+
+1. Find a person's address.
+->select *  from Person.Person
+inner join Person.BusinessEntityAddress
+on BusinessEntityAddress.BusinessEntityID = Person.BusinessEntityID
+join Person.Address
+on Address.AddressID = BusinessEntityAddress.AddressID
+
+
+->select *  from Person.Person p
+inner join Person.BusinessEntityAddress bea
+on bea.BusinessEntityID = p.BusinessEntityID
+join Person.Address a
+on a.AddressID = bea.AddressID
+
+2. Find a person's password and phone number.
+
+select * from Person.PersonPhone
+
+->select * from Person.Person
+inner join Person.Password
+on Password.BusinessEntityID=Person.BusinessEntityID
+join Person.PersonPhone
+on PersonPhone.BusinessEntityID=Person.BusinessEntityID
+
+3. Find a person's credit card info.
+
+-> --Now we have the list of people linked to their credit card information.
+select * from Person.Person
+inner join Sales.PersonCreditCard
+on PersonCreditCard.BusinessEntityID=Person.BusinessEntityID
+join Sales.CreditCard
+on CreditCard.CreditCardID=PersonCreditCard.CreditCardID
+
+-> --List of people that haven't made any purchases.
+select * from Person.Person
+left join Sales.PersonCreditCard
+on PersonCreditCard.BusinessEntityID=Person.BusinessEntityID
+left join Sales.CreditCard
+on CreditCard.CreditCardID=PersonCreditCard.CreditCardID
+where PersonCreditCard.BusinessEntityID is null;
+
+The key difference b/w inner join and left join is that with left join we are not losing any records.
+we are adding null's where records don't exist.
+__________________________________________________________________________
+->select * from Person.Person where CAST(Demographics as varchar(max)) like '%1935-02-16Z%'
+__________________________________________________________________________

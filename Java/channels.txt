@@ -1,0 +1,54 @@
+https://www.youtube.com/@harkirat1
+
+https://www.youtube.com/c/DefogTech/videos
+Using volatile vs AtomicInteger in Java concurrency
+
+https://www.youtube.com/user/googlecloudplatform/videos
+How does Uber scale to millions of concurrent requests?
+
+https://www.youtube.com/c/priyankavergadia/videos
+The battle of relational and non-relational databases | SQL vs NoSQL Explained
+
+https://www.youtube.com/c/javaplatform/videos
+REST in an Async world - JAX-RS Client API, Synchronous vs. Asynchronous, Client-Side vs Server-Side
+
+https://www.youtube.com/c/TechPrimers/videos
+
+https://www.youtube.com/c/JavaGuides/videos
+
+
+https://www.youtube.com/@vladmihalcea/videos (High-Performance Java Persistence Video Channel.)
+ 
+
+
+
+
+https://www.youtube.com/playlist?list=PL6Zs6LgrJj3vy7yWpH9xb3Y0I_pAPrvCU ( Mockito 3 Tutorials )
+https://github.com/dinesh-varyani/mockito
+
+
+
+
+
+
+Unit Testing:
+https://github.com/junit-team
+https://junit.org/junit5/docs/current/user-guide/
+
+https://docs.google.com/document/d/15mJ2Qrldx-J14ubTEnBj7nYN2FB8ap7xOn8GRAi24_A/edit
+https://site.mockito.org/
+https://github.com/mockito/mockito/releases
+https://github.com/mockito/mockito/issues
+
+https://github.com/powermock/powermock/releases
+https://www.baeldung.com/intro-to-powermock
+
+
+
+Searches:
+https://www.youtube.com/results?search_query=Mockito+tutorial
+
+
+
+
+https://www.sivalabs.in/

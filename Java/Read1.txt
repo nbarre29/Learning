@@ -1,0 +1,1625 @@
+https://drive.google.com/drive/my-drive
+naveen.dec29@gmail.com
+naveenkumar.barre@gmail.com
+
+__________________________________________________________________________
+
+public class Palindrome {
+
+	public static void main(String[] args) {
+		String str = "racecar";
+		if (isPalindrome(str)) {
+			System.out.println(str + " is a palindrome");
+		} else {
+			System.out.println(str + " is not a palindrome");
+
+		}
+
+	}
+	
+	private static boolean isPalindrome(String str) {
+		// Pointers pointing to the beginning and end of the string
+		int i=0,j=str.length()-1;
+		//while there are characters to compare
+		while (i < j) {
+			// if there is a mismatch
+			if (str.charAt(i) != str.charAt(j)) {
+				return false;
+			}
+			i++;
+			j--;
+			
+		}
+		//given string is a palindrome
+		return true;
+	}
+
+}
+__________________________________________________________________________
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class PrimeNumbers {
+
+	public static void main(String[] args) {
+		List<Integer> primeNumbers = new ArrayList<>();
+		for (int i = 1; i <= 100; i++) {
+			int counter = 0;
+			for (int j = i; j >= 1; j--) {
+				if (i % j == 0) {
+					counter += 1;
+				}
+			}
+			if (counter == 2) {
+				primeNumbers.add(i);
+			}
+		}
+		System.out.println("Prime numbers from 1 to 100 are :" + primeNumbers);
+
+	}
+
+}
+--------------------------------------------------------------------------
+import java.util.stream.IntStream;
+
+public class PrimeNumbers {
+
+    public static void main(String[] args) {
+        IntStream.rangeClosed(2, 100)
+                .filter(PrimeNumbers::isPrime)
+                .forEach(System.out::println);
+    }
+
+    private static boolean isPrime(int number) {
+        if (number <= 1) {
+            return false;
+        }
+
+        for (int i = 2; i <= Math.sqrt(number); i++) {         
+            if (number % i == 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
+//for (int i = 2; i <= Math.sqrt(number); i++) is fine too but adds unnecessary time complexity.
+__________________________________________________________________________
+public class MinimumDemo {
+
+	public static void main(String[] args) {
+		int[] intArray = { 7, 5, 3, 2,1,0 };
+		int min = intArray[0];
+		for ( int i =0; i < intArray.length ; i++){
+			if ( intArray[i] < min){
+				min = intArray [i];
+				
+			}
+		}
+		System.out.println(min);
+
+	}
+
+}
+--------------------------------------------------------------------------
+import java.util.Arrays;
+
+public class MinimumDemo {
+    public static void main(String[] args) {
+        int[] intArray = {7, 5, 3, 2, 1, 0};
+        final var minimum = Arrays.stream(intArray).min().getAsInt();
+        System.out.println(minimum);
+    }
+}
+--------------------------------------------------------------------------
+import java.util.Arrays;
+
+public class MinimumDemo {
+
+    public static void main(String[] args) {
+        int[] intArray = {7, 5, 3, 2, 1, 0};
+        final var minimum = Arrays.stream(intArray).min().orElseThrow();
+        System.out.println(minimum);
+    }
+}
+
+__________________________________________________________________________
+
+import java.util.Scanner;
+
+public class Test {
+
+	public static void main(String[] args) {
+				
+		Scanner scanner = new Scanner(System.in);
+		String input = "";
+		
+		while (!"quit".equals(input)) {
+			System.out.println("Input: ");
+			input = scanner.next().toLowerCase();
+			System.out.println(input);
+		}
+		
+		if (scanner != null) {
+			scanner.close();
+		}
+
+	}
+
+}
+__________________________________________________________________________
+
+
+import java.math.BigInteger;
+
+public class Greeting {
+	
+	private BigInteger id;
+	private String text;	
+	
+	public Greeting() {
+		
+	}	 	
+	
+	@Override
+	public String toString() {
+		return getId() + ", " + getText();
+	}
+
+	public BigInteger getId() {
+		return id;
+	}
+
+	public void setId(BigInteger id) {
+		this.id = id;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+	
+}
+--------------------------------------------------------------------------
+
+import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Test {
+	
+	private static BigInteger nextId;
+	private static Map<BigInteger, Greeting> greetingMap;
+	
+	private static Greeting save(Greeting greeting){
+		if (greetingMap == null) {
+			greetingMap = new HashMap<BigInteger, Greeting>();
+			nextId = BigInteger.ONE;			
+		}
+		
+		greeting.setId(nextId);		
+		greetingMap.put(greeting.getId(), greeting);
+		nextId = nextId.add(BigInteger.ONE);
+		return greeting;
+	}
+		
+	static {
+		Greeting g1 = new Greeting();
+		g1.setText("Hello World!");
+		save(g1);
+
+		Greeting g2 = new Greeting();
+		g2.setText("Hola Mundo!");
+		save(g2);
+
+	}
+
+	public static void main(String[] args) {
+		System.out.println(greetingMap.values());
+	}
+
+}
+
+__________________________________________________________________________
+
+
+public class PhoneNumberConverter {
+	
+	public static String removeNonDigits(String str) {
+		int size = str.length();
+		StringBuffer sb = new StringBuffer(size);
+		char ch;
+		for (int i = 0; i < size; i++) {
+			ch = str.charAt(i);
+			
+			if (Character.isDigit(ch)) {
+				sb.append(ch);
+			}
+		}
+		
+		return sb.toString();
+	}
+
+	public static String formatTel(String str) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(str.subSequence(0, 3) + "-");    // can also use sb.append(str.substring(0, 3) + "-");
+		sb.append(str.subSequence(3, 6) + "-");
+		sb.append(str.subSequence(6, str.length()));
+		return sb.toString();
+	}
+	
+	public static void main(String[] args) {
+		// System.out.println(formatTel(removeNonDigits("(832)517.6943")));
+		String text = "(832) 517.6943";
+		String contact = removeNonDigits(text);
+		System.out.println(formatTel(contact));
+
+	}
+
+}
+__________________________________________________________________________
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Test {
+
+	public static void main(String[] args) {
+		
+		List<String> list = new ArrayList<>();
+		list.addAll(Arrays.asList("Spring","Reactjs","Angular"));
+		System.out.println(list);
+		
+		List<String> list1=Arrays.asList("Spring","Reactjs","Angular");
+		System.out.println(list1);
+	}
+
+}
+__________________________________________________________________________
+https://mkyong.com/java8/java-8-streams-filter-examples/
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class NowJava8 {
+
+    public static void main(String[] args) {
+
+        List<String> languages = Arrays.asList("Spring", "Node", "React");
+
+        List<String> result = languages.stream()                // convert list to Stream
+                .filter(language -> !"React".equals(language))     // we dont like React
+                .collect(Collectors.toList());              // collect the output and convert Stream to a List
+
+        result.forEach(System.out::println);                //output : Spring, Node
+
+    }
+
+}
+==============================
+List<String> result = languages.stream()                // convert list to Stream
+                .filter(language -> true )     // return everything from the Stream
+                .collect(Collectors.toList()); 
+--------------------------------------------------------------------------
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class NowJava8 {
+
+    public static void main(String[] args) {
+
+        List<Integer> numbers = Arrays.asList(3,1,6,8,4,5);
+
+        List<Integer> result = numbers.stream()                // convert list to Stream
+                .filter(number -> !Integer.valueOf(8).equals(number))     // we dont like 8
+                .collect(Collectors.toList());              // collect the output and convert Stream to a List
+
+        result.forEach(System.out::println);                
+
+    }
+
+}
+
+__________________________________________________________________________
+https://www.baeldung.com/java-when-to-use-parallel-stream
+import java.util.Arrays;
+import java.util.List;
+
+public class SequentialStream {
+
+    public static void main(String[] args) {
+        List<Integer> listOfNumbers = Arrays.asList(1, 2, 3, 4);
+        listOfNumbers.stream().forEach(number ->
+          System.out.println(number + " " + Thread.currentThread().getName())
+        );
+    }
+
+}
+
+
+import java.util.Arrays;
+import java.util.List;
+
+public class ParallelStream {
+
+    public static void main(String[] args) {
+        List<Integer> listOfNumbers = Arrays.asList(1, 2, 3, 4);
+        listOfNumbers.parallelStream().forEach(number ->
+          System.out.println(number + " " + Thread.currentThread().getName())
+        );
+    }
+
+}
+__________________________________________________________________________
+https://mkyong.com/java8/java-8-parallel-streams-examples
+
+import java.util.stream.IntStream;
+
+public class ParallelExample3b {
+
+    public static void main(String[] args) {
+
+        System.out.println("Normal...");
+        long time1 = -System.currentTimeMillis();
+
+        IntStream range = IntStream.rangeClosed(1, 10);
+        range.forEach(x -> {
+            System.out.println("Thread : " + Thread.currentThread().getName() + ", value: " + x);
+        });
+        
+        time1 += System.currentTimeMillis();
+        System.out.println("Time taken for Normal: " + time1 + " ms");
+        
+
+        System.out.println("Parallel...");
+        
+        long time2 = -System.currentTimeMillis();
+
+        IntStream range2 = IntStream.rangeClosed(1, 10);
+        range2.parallel().forEach(x -> {
+            System.out.println("Thread : " + Thread.currentThread().getName() + ", value: " + x);
+        });
+        
+        time2 += System.currentTimeMillis();
+        System.out.println("Time taken for Parallel: " + time2 + " ms");
+        
+
+    }
+
+}
+__________________________________________________________________________
+https://mkyong.com/java8/java-8-parallel-streams-examples
+
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class ParallelExample4 {
+
+    public static void main(String[] args) {
+
+    	 long time1 = -System.currentTimeMillis();
+        long count = Stream.iterate(0, n -> n + 1)
+                .limit(100000)
+                //.parallel()  
+                .filter(ParallelExample4::isPrime)
+                .peek(x -> System.out.format("%s\t", x))
+                .count();
+
+        System.out.println("\nTotal: " + count);
+        
+        time1 += System.currentTimeMillis();
+        System.out.println("Time taken: " + time1 + " ms");
+
+    }
+
+    public static boolean isPrime(int number) {
+        if (number <= 1) return false;
+        return !IntStream.rangeClosed(2, number / 2).anyMatch(i -> number % i == 0);
+    }
+
+}
+__________________________________________________________________________
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
+//print prime numbers between 1 and 10
+public class Test {
+	
+	 public static boolean isPrime(int number) {
+	        if (number <= 1) return false;
+	        return !IntStream.rangeClosed(2, number / 2).anyMatch(i -> number % i == 0);
+	    }
+
+	public static void main(String[] args) {
+		
+		List<Integer> primeNumbers = new ArrayList<Integer>();
+		for (int i = 1; i <= 10; i++) {
+			if (isPrime(i)) {
+				primeNumbers.add(i);
+			}
+		}
+		
+		System.out.println(primeNumbers);
+	}
+
+}
+__________________________________________________________________________
+import java.util.stream.IntStream;
+
+public class Test {
+	
+	 public static boolean isPrime(int number) {
+	        if (number <= 1) return false;
+	        return !IntStream.rangeClosed(2, number / 2).anyMatch(i -> number % i == 0);
+	    }
+
+	public static void main(String[] args) {		
+		System.out.println(isPrime(13));		
+		
+		}
+}
+__________________________________________________________________________
+import java.util.stream.IntStream;
+
+public class Test {
+
+	public static void main(String[] args) {
+
+		IntStream result = IntStream.rangeClosed(2, 13 / 2);
+		result.forEach(System.out::println);
+
+	}
+
+}
+__________________________________________________________________________
+
+https://www.oracle.com/technical-resources/articles/java/ma14-java-se-8-streams.html
+The Stream interface in java.util.stream.Stream defines many operations, which can be grouped in two categories. In the example below we can see the following operations: 
+filter, sorted, and map, which can be connected together to form a pipeline
+collect, which closed the pipeline and returned a result 
+
+Stream operations that can be connected are called intermediate operations. They can be connected together because their return type is a Stream. Operations that close a stream pipeline are called terminal operations. They produce a result from a pipeline such as a List, an Integer, or even void (any non-Stream type).
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Test {
+
+    public static void main(String[] args) {
+    	
+    	List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8);
+    	List<Integer> twoEvenSquares = 
+    	    numbers.stream()
+    	           .filter(n -> {
+    	                    System.out.println("filtering " + n); 
+    	                    return n % 2 == 0;
+    	                  })
+    	           .map(n -> {
+    	                    System.out.println("mapping " + n);
+    	                    return n * n;
+    	                  })
+    	           .limit(2)
+    	           .collect(Collectors.toList());
+    	
+    	System.out.println(twoEvenSquares);
+    }
+}
+
+--------------------------------------------------------------------------
+
+Another useful form of numeric streams is numeric ranges. For example, you might want to generate all numbers between 1 and 100. Java SE 8 introduces two static methods available on IntStream, DoubleStream, and LongStream to help generate such ranges: range and rangeClosed.
+
+Both methods take the starting value of the range as the first parameter and the end value of the range as the second parameter. However, range is exclusive, whereas rangeClosed is inclusive. Below example uses rangeClosed to return a stream of all odd numbers between 10 and 30.
+
+import java.util.stream.IntStream;
+public class Test {
+
+    public static void main(String[] args) {
+    	
+    	IntStream oddNumbers = 
+    		    IntStream.rangeClosed(10, 30)
+    		             .filter(n -> n % 2 == 1);    // IntStream.rangeClosed(10, 30).filter(n -> { return (n % 2 == 1); });
+    	oddNumbers.forEach(System.out::println);
+    }
+}
+__________________________________________________________________________
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+ 
+/**
+ * Predicates and Lambda Expressions:
+ * 
+ * Predicates mixes well with the lambda expressions. We can have a generic
+ * implementation and pass predicate as argument in lambda expression. Based on
+ * the condition, operation is performed inside the lambda implementation.
+ *
+ */
+public class LambdaPredicate {
+   
+  public static int add(List<Integer> numList, Predicate<Integer> predicate) {
+      int sum = 0;
+      for (int number : numList) {
+          if (predicate.test(number)) {
+              sum += number;
+          }
+      }
+      return sum;
+  }
+   
+  public static void main(String args[]){
+     
+    List<Integer> numList = new ArrayList<Integer>();
+     
+    numList.add(new Integer(10));
+    numList.add(new Integer(20));
+    numList.add(new Integer(30));   
+    numList.add(new Integer(40));   
+    numList.add(new Integer(50));
+     
+    System.out.println("Add Everything: "+add(numList, n -> true));
+    System.out.println("Add Nothing: "+add(numList, n -> false));
+    System.out.println("Add Less Than 25: "+add(numList, n -> n < 25));   
+    System.out.println("Add 3 Multiples: "+add(numList, n -> n % 3 == 0));
+  }
+}
+__________________________________________________________________________
+https://github.com/koushikkothagal/Java-8-Lambda-Basics/blob/master/src/io/javabrains/unit1/Unit1ExerciseSolutionJava8.java
+https://www.youtube.com/watch?v=yubVRLP9Htw&list=PLqq-6Pq4lTTa9YGfyhyW2CqdtW9RtY-I3&index=15
+
+public class Person {
+
+	private String firstName;
+	private String lastName;
+	private int age;	
+	
+	public Person(String firstName, String lastName, int age) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.age = age;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	@Override
+	public String toString() {
+		return "Person [firstName=" + firstName + ", lastName=" + lastName + ", age=" + age + "]";
+	}
+	
+}
+=======================
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Predicate;
+
+public class Unit1ExerciseSolutionJava8 {
+
+	public static void main(String[] args) {
+		List<Person> people = Arrays.asList(
+				new Person("Charles", "Dickens", 60),
+				new Person("Lewis", "Carroll", 42),
+				new Person("Thomas", "Carlyle", 51),
+				new Person("Charlotte", "Bronte", 45),
+				new Person("Matthew", "Arnold", 39)
+				);
+		
+		// Step 1: Sort list by last name
+		Collections.sort(people, (p1, p2) -> p1.getLastName().compareTo(p2.getLastName()));
+		
+		// Step 2: Create a method that prints all elements in the list
+		System.out.println("Printing all persons");
+		printConditionally(people, p -> true);
+		
+		// Step 3: Create a method that prints all people that have last name beginning with C
+		System.out.println("Printing all persons with last name beginning with C");
+		printConditionally(people, p -> p.getLastName().startsWith("C"));
+
+		System.out.println("Printing all persons with first name beginning with C");
+		
+		printConditionally(people, p -> p.getFirstName().startsWith("C"));
+		
+	}
+
+	private static void printConditionally(List<Person> people, Predicate<Person> predicate) {
+		for (Person p : people) {
+			
+			if (predicate.test(p)) {
+				 System.out.println(p);
+			}			  
+			 
+		}
+	}
+}
+
+__________________________________________________________________________
+https://docs.oracle.com/javase/tutorial/collections/streams/index.html
+
+import java.time.LocalDate;
+import java.time.chrono.IsoChronology;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Person {
+  
+    public enum Sex {
+        MALE, FEMALE
+    }
+  
+    String name; 
+    LocalDate birthday;
+    Sex gender;
+    String emailAddress;
+  
+    Person(String nameArg, LocalDate birthdayArg,
+        Sex genderArg, String emailArg) {
+        name = nameArg;
+        birthday = birthdayArg;
+        gender = genderArg;
+        emailAddress = emailArg;
+    }  
+
+    public int getAge() {
+        return birthday
+            .until(IsoChronology.INSTANCE.dateNow())
+            .getYears();
+    }
+
+    public void printPerson() {
+      System.out.println(name + ", " + this.getAge());
+    }
+    
+    public Sex getGender() {
+        return gender;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+    
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+    
+    public static int compareByAge(Person a, Person b) {
+        return a.birthday.compareTo(b.birthday);
+    }
+
+    public static List<Person> createRoster() {
+        
+        List<Person> roster = new ArrayList<>();
+        roster.add(
+            new Person(
+            "Fred",
+            IsoChronology.INSTANCE.date(1980, 6, 20),
+            Person.Sex.MALE,
+            "fred@example.com"));
+        roster.add(
+            new Person(
+            "Jane",
+            IsoChronology.INSTANCE.date(1990, 7, 15),
+            Person.Sex.FEMALE, "jane@example.com"));
+        roster.add(
+            new Person(
+            "George",
+            IsoChronology.INSTANCE.date(1991, 8, 13),
+            Person.Sex.MALE, "george@example.com"));
+        roster.add(
+            new Person(
+            "Bob",
+            IsoChronology.INSTANCE.date(2000, 9, 12),
+            Person.Sex.MALE, "bob@example.com"));
+        
+        return roster;
+    }    
+}
+=============================
+import java.util.List;
+
+public class BulkDataOperationsExamples {
+    
+    public static void main(String... args) {
+        
+        // Create sample data
+
+        List<Person> roster = Person.createRoster();
+        
+        // 1. Print names of members, for-each loop
+        
+        System.out.println("Members of the collection (for-each loop):");
+        for (Person p : roster) {
+            System.out.println(p.getName());
+        }
+        
+        // 2. Print names of members, forEach operation
+        
+        System.out.println("Members of the collection (bulk data operations):");
+        roster
+            .stream()
+            .forEach(e -> System.out.println(e.getName()));
+            
+        // 3. Print names of male members, forEach operation
+
+        System.out.println(
+            "Male members of the collection (bulk data operations):");
+        roster
+            .stream()
+            .filter(e -> e.getGender() == Person.Sex.MALE)
+            .forEach(e -> System.out.println(e.getName()));
+            
+        // 4. Print names of male members, for-each loop 
+
+        System.out.println("Male members of the collection (for-each loop):");
+        for (Person p : roster) {
+            if (p.getGender() == Person.Sex.MALE) {
+                System.out.println(p.getName());
+            }
+        }
+         
+        // 5. Get average age of male members of the collection:
+        
+        double average = roster
+            .stream()
+            .filter(p -> p.getGender() == Person.Sex.MALE)
+            .mapToInt(Person::getAge)
+            .average()
+            .getAsDouble();
+            
+        System.out.println(
+            "Average age of male members (bulk data operations): " +
+            average);
+    }
+}
+__________________________________________________________________________
+https://www.youtube.com/watch?v=9EzGgz5th_s
+class Calc{
+	public int add(int ... n) {
+		int sum = 0;
+		for (int i : n) {
+			sum += i;
+		}
+		return sum;
+	}
+}
+
+public class VarargsDemo {
+
+	public static void main(String[] args) {
+		Calc obj = new Calc();
+		System.out.println(obj.add(4,5,6));
+
+	}
+}
+--------------------------------------------------------------------------
+Rules for varargs:
+While using the varargs, you must follow some rules otherwise program code won't compile. The rules are as follows:
+There can be only one variable argument in the method.
+Variable arguments (varargs) must be the last argument.
+
+
+Advantage of Varargs:
+We don't have to provide overloaded methods so less code.
+
+
+public class Test {
+
+	public static void display(int num, String... values) {
+		System.out.println("number is " + num);
+		for (String s : values) {
+			System.out.println(s);
+		}
+	}
+
+	public static void main(String[] args) {
+
+		display(500, "hello");// one argument
+		display(1000, "my", "name", "is", "varargs");// four arguments
+	}
+} 
+__________________________________________________________________________
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ListIterator;
+
+public class ListIteratorExample {
+
+	public static void main(String[] args) {
+		List<String> progLanguages = new ArrayList<>();
+		progLanguages.addAll(Arrays.asList("Java", "C", "C++", "Python", "JavaScript"));
+
+		ListIterator<String> listIterator = progLanguages.listIterator();
+
+		System.out.println("Forward direction iteration");
+		while (listIterator.hasNext()) {
+			String element = listIterator.next();
+			System.out.println(element);
+
+		}
+
+		System.out.println("Backward direction iteration");
+		while (listIterator.hasPrevious()) {
+			String element = listIterator.previous();
+			System.out.println(element);
+
+		}
+
+	}
+}
+__________________________________________________________________________
+The program below will throw ConcurrentModificationException
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class Test {
+
+    public static void main(String[] args) {
+    	List<String> list = new ArrayList<>();
+    	list.add("one");
+    	list.add("two");
+    	list.add("three");
+    	
+    	Iterator<String> iterator = list.iterator();
+    	while (iterator.hasNext()) {
+			String str = iterator.next();
+			
+			if ("one".equals(str)) {
+				list.remove("one");
+			}
+			
+			if ("three".equals(str)) {
+				list.add("four");
+			}
+		}
+    }
+}
+--------------------------------------------------------------------------
+Fix the ConcurrentModificationException above by using CopyOnWriteArrayList
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+public class Test {
+
+    public static void main(String[] args) {
+    	List<String> list = new CopyOnWriteArrayList<>();
+    	list.add("one");
+    	list.add("two");
+    	list.add("three");
+    	
+    	Iterator<String> iterator = list.iterator();
+    	while (iterator.hasNext()) {
+			String str = iterator.next();
+			
+			if ("one".equals(str)) {
+				list.remove("one");
+			}
+			
+			if ("three".equals(str)) {
+				list.add("four");
+			}
+		}
+    	System.out.println(list);
+    }
+}
+__________________________________________________________________________
+
+public class Book {
+	private String title;
+	private float price;
+	
+	public Book(String title, float price) {
+		this.title = title;
+		this.price = price;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
+	}
+
+	public String toString() {
+		return this.title + "-" + this.price;
+	}
+}
+
+
+
+import java.util.*;
+
+public class LambdaComparatorExample {
+	public static void main(String[] args) {
+		Book book1 = new Book("Head First Java", 38.9f);
+		Book book2 = new Book("Thinking in Java", 30.0f);
+		Book book3 = new Book("Effective Java", 50.0f);
+		Book book4 = new Book("Code Complete", 42.5f);
+
+		List<Book> listBooks = Arrays.asList(book1, book2, book3, book4);
+
+		System.out.println("Before sorting:");
+		System.out.println(listBooks);
+		
+		
+/*		//Before jdk8 we used to do this way
+		Comparator<Book> titleComparator = new Comparator<Book>() {
+			public int compare(Book book1, Book book2) {
+				return book1.getTitle().compareTo(book2.getTitle());
+			}
+		};
+		Collections.sort(listBooks, titleComparator);*/
+	
+		
+		// Using jdk8 Lambda
+		Comparator<Book> titleComparator = ( b1,  b2) -> b1.getTitle().compareTo(b2.getTitle());
+		Collections.sort(listBooks, titleComparator);   // Collections.sort(listBooks, titleComparator.reversed());
+		
+		System.out.println("\nAfter sorting by title:");
+		System.out.println(listBooks);
+
+		Comparator<Book> descPriceComp = ( b1,  b2) -> (int) (b2.getPrice() - b1.getPrice());
+
+		Collections.sort(listBooks, descPriceComp);
+
+		System.out.println("\nAfter sorting by descending price:");
+		System.out.println(listBooks);
+
+		Collections.sort(listBooks, (b1, b2) -> (int) (b1.getPrice() - b2.getPrice()));
+
+		System.out.println("\nAfter sorting by ascending price:");
+		System.out.println(listBooks);
+	}
+}
+__________________________________________________________________________
+https://www.benchresources.net/java-8-how-to-sort-linkedlist-elements/
+
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
+ 
+//Sorting LinkedList of Integer elements
+public class SortLinkedListOfIntegerUsingStream {
+ 
+    public static void main(String[] args) { 
+        
+        List<Integer> numbers = new LinkedList<>(); 
+        
+        numbers.add(87);
+        numbers.add(18);
+        numbers.add(98);
+        numbers.add(64);
+        numbers.add(25);
+        numbers.add(77);
+        numbers.add(54);
+ 
+ 
+        //  original LinkedList in insertion order
+        System.out.println("1. Original LinkedList<Integer> "
+                + "as per insertion-order :- \n");
+        numbers.forEach(System.out::println);
+ 
+ 
+        // stream.sorted() - natural order
+		List<Integer> sortedNumbers = numbers.stream().sorted().collect(Collectors.toList()); 
+		System.out.println("\n2. Natural order of LinkedList<Integer> :- \n");
+		sortedNumbers.forEach(System.out::println);
+ 
+ 
+        // stream.sorted() - reverse order
+		List<Integer> reverseSortedNumber = numbers.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList()); 
+        System.out.println("\n3. Reverse order of LinkedList<Integer> :- \n");
+        reverseSortedNumber.forEach(System.out::println);
+    }
+}
+--------------------------------------------------------------------------
+
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+ 
+//Sorting LinkedList of Integer elements
+public class SortLinkedListOfIntegerUsingListSortMethod {
+ 
+    public static void main(String[] args) { 
+        
+        List<Integer> numbers = new LinkedList<>(); 
+        
+        numbers.add(87);
+        numbers.add(18);
+        numbers.add(98);
+        numbers.add(64);
+        numbers.add(25);
+        numbers.add(77);
+        numbers.add(54);
+ 
+ 
+        //  original LinkedList in insertion order
+        System.out.println("1. Original LinkedList<Integer> "
+                + "as per insertion-order :- \n");
+        numbers.forEach(System.out::println);
+ 
+ 
+        
+        numbers.sort(Comparator.naturalOrder());
+		System.out.println("\n2. Natural order of LinkedList<Integer> :- \n");
+		numbers.forEach(System.out::println);
+ 
+ 
+        
+		numbers.sort(Comparator.reverseOrder());
+        System.out.println("\n3. Reverse order of LinkedList<Integer> :- \n");
+        numbers.forEach(System.out::println);
+    }
+}
+__________________________________________________________________________
+
+import java.util.LinkedList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+//Sorting LinkedList of String elements
+public class SortLinkedListOfStringUsingStream {
+ 
+    public static void main(String[] args) {
+ 
+       
+        List<String> names = new LinkedList<>(); 
+        
+        names.add("Karthik");
+        names.add("Nagarjuna");
+        names.add("Ramki");
+        names.add("Surya");
+        names.add("Ajith");
+        names.add("Prasanna");
+ 
+ 
+        // original LinkedList in insertion order
+        System.out.println("1. Original LinkedList<String> "
+                + "as per insertion-order :- \n");
+        names.forEach(System.out::println);
+ 
+ 
+        // sort using Stream - alphabetical order
+		List<String> sortedNames = names.stream().sorted().collect(Collectors.toList());
+        System.out.println("\n2. Alphabetically sorted-order "
+                + "of LinkedList<String> :- \n");
+        sortedNames.forEach(System.out::println);
+ 
+ 
+        // sort using Stream - reverse alphabetical order
+		List<String> reverseSortedNames = names.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        System.out.println("\n3. Reverse alphabetically sorted-order "
+                + "of LinkedList<String> :- \n");
+        reverseSortedNames.forEach(System.out::println);
+    }
+}
+--------------------------------------------------------------------------
+
+import java.util.LinkedList;
+import java.util.Comparator;
+import java.util.List;
+
+//Sorting LinkedList of String elements
+public class SortLinkedListOfStringUsingListSortMethod {
+ 
+    public static void main(String[] args) { 
+       
+        List<String> names = new LinkedList<>(); 
+        
+        names.add("Karthik");
+        names.add("Nagarjuna");
+        names.add("Ramki");
+        names.add("Surya");
+        names.add("Ajith");
+        names.add("Prasanna");
+ 
+ 
+        // original LinkedList in insertion order
+        System.out.println("1. Original LinkedList<String> "
+                + "as per insertion-order :- \n");
+        names.forEach(System.out::println);
+ 
+ 
+        
+		names.sort(Comparator.naturalOrder());
+        System.out.println("\n2. Alphabetically sorted-order "
+                + "of LinkedList<String> :- \n");
+        names.forEach(System.out::println);
+ 
+ 
+        
+		names.sort(Comparator.reverseOrder());
+        System.out.println("\n3. Reverse alphabetically sorted-order "
+                + "of LinkedList<String> :- \n");
+        names.forEach(System.out::println);
+    }
+}
+
+
+
+__________________________________________________________________________
+//Sorting LinkedList of Student objects
+
+public class Student {
+ 
+    
+    private int rollNumber;
+    private String name;
+    private int age;
+    
+	public Student(int rollNumber, String name, int age) {
+		this.rollNumber = rollNumber;
+		this.name = name;
+		this.age = age;
+
+	}
+
+	public int getRollNumber() {
+		return rollNumber;
+	}
+
+	public void setRollNumber(int rollNumber) {
+		this.rollNumber = rollNumber;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [rollNumber=" + rollNumber + ", name=" + name + ", age=" + age + "]";
+	}	 
+ 
+}
+
+
+import java.util.LinkedList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+ 
+public class SortLinkedListOfStudentsUsingStreamSorted {
+ 
+    public static void main(String[] args) { 
+        
+        List<Student> students = new LinkedList<>(); 
+        
+        students.add(new Student(2063, "Pravin", 35));
+        students.add(new Student(2097, "Shweta", 32));
+        students.add(new Student(2019, "Sachin", 28));
+        students.add(new Student(2023, "Kalpana", 27));
+        students.add(new Student(2045, "Rajdeepan", 31));
+        students.add(new Student(2073, "Sneha", 24)); 
+        
+        System.out.println("1. Original LinkedList as per insertion-order :- \n");
+        students.forEach(System.out::println);
+ 
+ 
+        // sort using Stream - increasing-order of Age
+		List<Student> sortedStudents = students.stream().sorted(Comparator.comparingInt(Student::getAge)).collect(Collectors.toList());      
+        System.out.println("\n2. Sorted Student LinkedList according to Age :- \n");
+        sortedStudents.forEach(System.out::println);
+ 
+ 
+		// sort using Stream - reverse-order of rollNumber
+		List<Student> reverseSortedStudents = students.stream()
+				.sorted(Comparator.comparingInt(Student::getRollNumber).reversed()).collect(Collectors.toList());
+		System.out.println("\n3. Reverse sorted Student LinkedList - according to Id :- \n");
+		reverseSortedStudents.forEach(System.out::println);
+    }
+}
+
+
+import java.util.LinkedList;
+import java.util.Comparator;
+import java.util.List;
+ 
+public class SortLinkedListOfStudentsUsingListSortMethod {
+ 
+    public static void main(String[] args) { 
+        
+        List<Student> students = new LinkedList<>(); 
+        
+        students.add(new Student(2063, "Pravin", 35));
+        students.add(new Student(2097, "Shweta", 32));
+        students.add(new Student(2019, "Sachin", 28));
+        students.add(new Student(2023, "Kalpana", 27));
+        students.add(new Student(2045, "Rajdeepan", 31));
+        students.add(new Student(2073, "Sneha", 24)); 
+        
+        System.out.println("1. Original LinkedList as per insertion-order :- \n");
+        students.forEach(System.out::println);
+ 
+ 
+        // increasing-order of Age		  
+        students.sort(Comparator.comparing(Student::getAge));
+        System.out.println("\n2. Sorted Student LinkedList according to Age :- \n");
+        students.forEach(System.out::println);
+ 
+ 
+		// reverse-order of rollNumber
+		students.sort(Comparator.comparing(Student::getRollNumber).reversed());
+		System.out.println("\n3. Reverse sorted Student LinkedList - according to Id :- \n");
+		students.forEach(System.out::println);
+    }
+}
+
+__________________________________________________________________________
+
+//Print even and odd numbers in increasing order using two threads
+
+public class PrintOddEven {
+	
+	int count =1;
+	int MAX = 10;
+	boolean valueSet = false;
+	synchronized void printEven() {
+		
+		while (count < MAX) {
+		if (!valueSet)
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				System.out.println("InterruptedException caught");
+			}
+		System.out.println("Even: " + count);
+		count++;
+		valueSet = false;
+		notify();
+		}
+	}
+	
+
+	synchronized void printOdd() {
+		
+		 try {
+	            Thread.sleep(1000);
+	        } catch (InterruptedException e1) {
+	            e1.printStackTrace();
+	        }
+		 while (count < MAX) {
+		if (valueSet)
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				System.out.println("InterruptedException caught");
+			}
+		
+		valueSet = true;
+		System.out.println("Odd: " + count);
+		count++;
+		notify();
+		 }
+	}
+	
+	
+
+	public static void main(String[] args) {
+		PrintOddEven poe = new PrintOddEven();
+		
+		Thread t1 = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				poe.printOdd();
+			}
+		});
+		
+		Thread t2 = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				poe.printEven();
+				
+			}
+		});		
+		
+		t1.start();		
+		t2.start();	
+	}
+
+}
+--------------------------------------------------------------------------
+
+PrintOddEven poe = new PrintOddEven();
+
+        Thread t1 = new Thread(() -> {
+            poe.printOdd();
+        });
+
+        Thread t2 = new Thread(() -> poe.printEven());
+
+        t1.start();
+        t2.start();
+--------------------------------------------------------------------------
+PrintOddEven poe = new PrintOddEven();
+
+        (new Thread(() -> poe.printOdd())).start();
+        (new Thread(() -> poe.printEven())).start();
+__________________________________________________________________________
+
+//Print even and odd numbers in increasing order using two threads
+public class GFG {
+	// Starting counter
+	int counter = 1;
+	static int N;
+	// Function to print odd numbers
+	public void printOddNumber()
+	{
+		synchronized (this)
+		{
+			// Print number till the N
+			while (counter < N) {
+				// If count is even then print
+				while (counter % 2 == 0) {
+					// Exception handle
+					try {
+						wait();
+					}
+					catch (
+						InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+
+				// Print the number
+				System.out.print(counter + " ");
+				// Increment counter
+				counter++;
+				// Notify to second thread
+				notify();
+			}
+		}
+	}
+
+	// Function to print even numbers
+	public void printEvenNumber()
+	{
+		synchronized (this)
+		{
+			// Print number till the N
+			while (counter < N) {
+
+				// If count is odd then print
+				while (counter % 2 == 1) {
+
+					// Exception handle
+					try {
+						wait();
+					}
+					catch (
+						InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+
+				// Print the number
+				System.out.print(counter + " ");
+				// Increment counter
+				counter++;
+				// Notify to 2nd thread
+				notify();
+			}
+		}
+	}
+	
+	public static void main(String[] args)
+	{
+		// Given Number N
+		N = 10;
+		// Create an object of class
+		GFG mt = new GFG();
+		// Create thread t1
+		Thread t1 = new Thread(new Runnable() {
+			public void run()
+			{
+				mt.printEvenNumber();
+			}
+		});
+
+		// Create thread t2
+		Thread t2 = new Thread(new Runnable() {
+			public void run()
+			{
+				mt.printOddNumber();
+			}
+		});
+
+		// Start both threads
+		t1.start();
+		t2.start();
+	}
+}
+--------------------------------------------------------------------------
+
+public class GFG {
+
+    int counter = 1, limit = 20;
+
+    private  void printOddNumber(){
+        synchronized (this){
+            while (counter < limit){
+                while (counter % 2 == 0){
+                    try {
+                        wait();
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                System.out.println("Odd thread: " + counter);
+                counter ++;
+                notify();
+            }
+
+        }
+    }
+
+    private void printEvenNumber(){
+        synchronized (this){
+            while (counter < limit){
+                while (counter % 2 == 1){
+                    try {
+                        wait();
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                System.out.println("Even thread: " + counter);
+                counter ++;
+                notify();
+            }
+
+        }
+    }
+
+    public static void main(String[] args) {
+
+        GFG printOddEven = new GFG();
+        Thread t1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                printOddEven.printEvenNumber();
+            }
+        });
+
+        Thread t2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                printOddEven.printOddNumber();
+            }
+        });
+
+        t1.start();
+        t2.start();
+
+    }
+}
+
+__________________________________________________________________________
+
+In this program, we create two threads, one for printing even numbers (printEven) and the other for printing odd numbers (printOdd). The lock object is used to provide mutual exclusion when accessing the currentNumber variable. The Condition objects evenCondition and oddCondition are used to signal and wait for the appropriate conditions.
+
+The lambda expressions are used to define the runnables for each thread in a concise way. The lock.lock() and lock.unlock() methods ensure that only one thread can access the shared variables at a time, while evenCondition.await() and oddCondition.await() make the threads wait until the desired condition is met. The evenCondition.signal() and oddCondition.signal() methods notify the waiting threads to continue their execution.
+
+Finally, in the main method, we create an instance of NumberPrinter and start the two threads to begin printing even and odd numbers alternately.
+
+
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class NumberPrinter {
+    private int currentNumber = 1;
+    private Lock lock = new ReentrantLock();
+    private Condition evenCondition = lock.newCondition();
+    private Condition oddCondition = lock.newCondition();    
+
+    public void printEven() {
+        new Thread(() -> {
+            while (currentNumber < 10) {
+                lock.lock();
+                try {
+                    if (currentNumber % 2 != 0) {
+                        evenCondition.await();
+                    }
+                    System.out.println("Even: " + currentNumber);
+                    currentNumber++;
+                    oddCondition.signal();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    lock.unlock();
+                }
+            }
+        }).start();
+    }
+
+    public void printOdd() {
+        new Thread(() -> {
+            while (currentNumber < 10) {
+                lock.lock();
+                try {
+                    if (currentNumber % 2 == 0) {
+                        oddCondition.await();
+                    }
+                    System.out.println("Odd: " + currentNumber);
+                    currentNumber++;
+                    evenCondition.signal();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    lock.unlock();
+                }
+            }
+        }).start();
+    }
+
+    public static void main(String[] args) {
+        NumberPrinter numberPrinter = new NumberPrinter();
+        numberPrinter.printEven();
+        numberPrinter.printOdd();
+    }
+}
+__________________________________________________________________________
