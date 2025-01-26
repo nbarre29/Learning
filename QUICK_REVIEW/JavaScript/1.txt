@@ -155,6 +155,7 @@ function getDisplayName(name?: string | null): string {
 console.log(getDisplayName('Alice')); // Output: "Alice"
 console.log(getDisplayName(null)); // Output: "Guest" (since null is nullish)
 console.log(getDisplayName(undefined)); // Output: "Guest" (since undefined is nullish)
+console.log(getDisplayName()); // Output: "Guest" ( getDisplayName is invoked without any arguments, so name is undefined
 console.log(getDisplayName('')); // Output: "" (Empty string is NOT nullish, so it is used as-is)
 
 
@@ -308,5 +309,63 @@ Why it works?
 
 ___________________________________________________________________________
 
+-> The as keyword is part of TypeScript. It is used for type assertions, which allow you to explicitly specify the type of a value when TypeScript cannot infer it correctly.
+
+let someValue: unknown = 'Hello, TypeScript!';
+let strLength: number = (someValue as string).length;
+
+console.log(strLength); // 18
+
+
+Key Points:
+
+    Type assertions don’t change the actual type of the value at runtime; they just help TypeScript with type checking.
+    They are different from type casting in other languages like Java or C# because they don’t perform runtime conversions.
+    They should be used cautiously, especially when working with unknown or any types, to avoid runtime errors.
+	
+--------------------------------------------------------------------	
+	
+-> The unknown keyword in TypeScript is a type that represents a value whose type is not known at the time of writing. It is safer than any because TypeScript enforces type checks before performing operations on an unknown value.
+Key Features of unknown:
+
+    Stricter than any – You cannot perform operations on an unknown type without first checking its type.
+    Safe Type Assignment – unknown can be assigned to any type, but cannot be assigned to anything other than unknown or any without a type check or assertion.
+    Useful for API Responses or Dynamic Data – When dealing with dynamic data where the exact type is not known upfront.
+
+	
+Example Usage
+✅ Safe Handling of unknown	
+	
+function processValue(value: unknown) {
+  if (typeof value === 'string') {
+    console.log(value.toUpperCase()); // Safe because we checked the type
+  } else if (typeof value === 'number') {
+    console.log(value.toFixed(2)); // Safe for numbers
+  } else {
+    console.log('Unknown type');
+  }
+}
+
+processValue('Hello'); // Output: HELLO
+processValue(42.567); // Output: 42.57
+processValue(true); // Output: Unknown type
+
+
+❌ Incorrect Usage of unknown
+
+let value: unknown = 'Hello';
+console.log(value.toUpperCase()); // ❌ Error: 'value' is of type 'unknown'.
+
+
+To fix this, you must narrow the type first (using typeof, assertions, or type guards).
+
+
+Best Practices
+
+    Use unknown when a variable’s type is unknown but you want TypeScript to enforce type safety.
+    Use any only when you need maximum flexibility and are sure about potential types.
+    Always narrow down unknown types before using them.
+	
+___________________________________________________________________________
 
 
